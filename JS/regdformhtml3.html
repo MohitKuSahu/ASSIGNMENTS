@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="regdformhtml3.css">
+
+</head>
+
+<body style="background-color: cyan;">
+    <form name="myForm" class="container">
+
+        <h1 style="text-align: center; text-decoration: underline;">
+            REGISTRATION FORM</h1>
+
+        <h3>PERSONAL INFORMATION</h3>
+        <div class="flex-container1">
+
+            <div class="flex-item1">
+                <label for="fname">FIRST NAME:</label>
+                <input type="text" id="fname" name="FIRSTNAME">
+                <small>Error Message</small>
+            </div>
+
+            <div class="flex-item2">
+                <label for="mname" class="unreq">MIDDLE NAME:</label>
+                <input type="text" id="mname" name="MIDDLENAME">
+                <small>Error Message</small>
+            </div>
+
+            <div class="flex-item3">
+                <label for="lname">LAST NAME:</label>
+                <input type="text" id="lname" name="LASTNAME">
+                <small>Error Message</small>
+            </div>
+
+        </div>
+        <div class="flex-container2">
+
+            <div class="flex-item1">
+                <label for="Date of Birth">DATE OF BIRTH:</label>
+                <input type="date" id="Date of Birth" min="2000-01-01" name="DATE OF BIRTH" >
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="GENDER" id="GENDER">GENDER:</label>
+                <input type="radio" id="MALE" name="GENDER" value="MALE"  style="cursor: pointer;" >
+                <label for="male" class="unreq">MALE</label>
+
+                <input type="radio" id="FEMALE" name="GENDER" value="FEMALE" style="cursor: pointer;">
+                <label for="female" class="unreq">FEMALE</label>
+
+                <input type="radio" id="OTHERS" name="GENDER" value="OTHERS" style="cursor: pointer;">
+                <label for="others" class="unreq">OTHERS</label>
+                <small>Error Message</small>
+            </div>
+
+           
+            <div class="flex-item3">
+                
+                <label for="STATUS" id="STATUS">STATUS:</label>
+                <input type="radio" id="SINGLE" name="STATUS" value="SINGLE" style="cursor: pointer;" >
+                <label for="male" class="unreq">SINGLE</label>
+
+                <input type="radio" id="MARRIED" name="STATUS" value="MARRIED" style="cursor: pointer;">
+                <label for="female" class="unreq">MARRIED</label>
+
+                <small>Error Message</small>
+            </div>
+
+
+
+        </div>
+
+        <div class="flex-container1">
+
+            <div class="flex-item1">
+                <label for="aadhar">AADHAR:</label>
+                <input type="number" id="aadhar" name="AADHAR">
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="pan">PAN CARD:</label>
+                <input type="text" id="pan" name="PAN">
+                <small>Error Message</small>
+            </div>
+
+
+        </div>
+
+
+
+
+        <h3>EDUCATIONAL QUALIFICATIONS</h3>
+        <h4>Class 10th Certificate:</h4>
+        <div class="flex-container1">
+            <div class="flex-item1">
+                <label for="BOARD" id="Board10">BOARD:</label>
+
+                <input type="radio" id="CBSE" name="Board10" value="CBSE" >
+                <label for="CBSE" class="unreq">CBSE</label>
+
+                <input type="radio" id="ICSE" name="Board10" value="ICSE" >
+                <label for="ICSE" class="unreq">ICSE</label>
+
+                <input type="radio" id="otherse" name="Board10"value="OTHER BOARD" >
+                <label for="otherse" class="unreq">OTHERS</label>
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="sch">SCHOOL/COLLEGE:</label>
+                <input type="text" id="sch" class="school" name=" Class 10th SCHOOL">
+                <small>Error Message</small>
+            </div>
+
+
+
+
+            <div class="flex-item3">
+                <label for="per">PERCENTAGE/CGPA:</label>
+                <input type="text" id="per" class="percent" name=" Class 10th PERCENTAGE/CGPA">
+                <small>Error Message</small>
+            </div>
+
+
+
+
+        </div>
+
+        <h4>Class 12th Certificate:</h4>
+        <div class="flex-container1">
+            <div class="flex-item1">
+                <label for="BOARD" id="Board12">BOARD:</label>
+
+                <input type="radio" id="CBS" name="Board12"  value="CBSE">
+                <label for="CBS" class="unreq">CBSE</label>
+
+                <input type="radio" id="ICS" name="Board12" value="ICSE">
+                <label for="ICS" class="unreq">ICSE</label>
+
+                <input type="radio" id="other" name="Board12" value="OTHER BOARD">
+                <label for="other" class="unreq">OTHERS</label>
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="scho">SCHOOL/COLLEGE:</label>
+                <input type="text" id="scho" class="school" name=" Class 12th SCHOOL">
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item3">
+                <label for="perc">PERCENTAGE/CGPA:</label>
+                <input type="text" id="perc" class="percent" name=" Class 12th PERCENTAGE/CGPA">
+                <small>Error Message</small>
+            </div>
+
+
+
+
+        </div>
+        <h4>BTECH Certificate:</h4>
+        <div class="flex-container1">
+
+            <div class="flex-item1">
+                <label for="schoo">SCHOOL/COLLEGE:</label>
+                <input type="text" id="schoo" class="school" name="BTECH COLLEGE">
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="perce">PERCENTAGE/CGPA:</label>
+                <input type="text" id="perce" class="percent" name=" BTECH PERCENTAGE/CGPA">
+                <small>Error Message</small>
+            </div>
+
+
+
+        </div>
+
+        <h3>CONTACTS</h3>
+        <div class="flex-container1">
+            <div class="flex-item1">
+                <label for="Country">COUNTRY:</label>
+                <input list="countries" name="COUNTRY" id="COUNTRY">
+                <datalist id="countries">
+                  <option value="INDIA">
+                  <option value="NEPAL">
+                  <option value="CHINA">
+                  <option value="BHUTAN">
+                  <option value="IRAQ">
+                  </datalist>
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="State">STATE:</label>
+                <input list="states" name="STATE" id="STATE">
+                <datalist id="states">
+                  <option value="ODISHA">
+                  <option value="KATHMANDU">
+                  <option value="BEIJING">
+                  <option value="INDONESIA">
+                  <option value="NEW YORK">
+                </datalist>
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item3">
+                <label for="phn">MOBILE NO:</label>
+                <input type="tel" id="phn" name="MOBILE NO.">
+                <small>Error Message</small>
+            </div>
+
+
+        </div>
+
+        <h3>LOCATION</h3>
+        <div class="flex-container1">
+            <div class="flex-item1">
+                <label for="addr1">ADDRESS 1:</label>
+                <input type="text" id="addr1" class="address" name="ADDRESS1">
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item2">
+                <label for="addr2">ADDRESS 2:</label>
+                <input type="text" id="addr2" class="address" name="ADDRESS2">
+                <small>Error Message</small>
+            </div>
+
+
+
+            <div class="flex-item3">
+                <label for="email">EMAIL ID:</label>
+                <input type="email" id="email" name="EMAIL">
+                <small>Error Message</small>
+            </div>
+
+
+        </div>
+        </div>
+
+        <div id="container4">
+            <h3>DECLARATION</h3>
+
+
+
+            <div>
+                <input type="checkbox" id="dec1" name="checkbox" >
+                <label for="dec1" class="unreq" id="dec3">
+                    I certify that the information I have written on the application form and the
+                    documents I have submitted to
+                    be
+                    true and accurate.</label>
+                    <small style="color: red;"></small>
+            </div>
+
+
+
+            <div>
+                <input type="checkbox" id="dec2" name="checkbox" >
+                <label for="dec2" class="unreq" id="dec4">
+                    I understand and agree that any false or misleading information will justify a denial of admission
+                    into
+                    the
+                    company.
+                </label>
+                <small style="color: red;"></small>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="flex-container1">
+
+            <div class="flex-item1">
+                <button onclick="return validateInput()" type="button" id="button1">Submit</button>
+            </div>
+
+            <div class="flex-item2">
+                <button class="button2" type="reset">Reset</button>
+            </div>
+
+        </div>
+    </form>
+
+
+
+
+   
+    <div id="myModal">
+      <span onclick="closeModal()" style="cursor: pointer; float: right;  font-size: 3rem;
+      font-weight: bold;">&times;</span>
+      <h2 style="text-align: center;">REGISTRATION DETAILS</h2>
+      <div id="inputValues"></div>
+      <center><button class="button3" data-modal-target="#modal">Submit</button></center>
+    </div>
+  
+    <div id="overlay"></div>
+
+
+
+    <div class="modal" id="modal">
+     
+        <div class="modal-body">
+          <img src="404-tick.png">
+            <center><h1>THANK YOU</h1>
+            <br>
+            <a href="regdformhtml3.html"><button>OK</button></a>
+            </center>
+        </div>
+        
+      </div>
+      <div id="overlays"></div>
+
+    <script src="regdformhtml3.js"></script>
+
+</body>
+</html>
