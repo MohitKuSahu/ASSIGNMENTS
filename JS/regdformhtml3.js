@@ -1,7 +1,4 @@
 
-                                                            
-
-
 let firstname = document.getElementById("fname");
 let lastname = document.getElementById("lname");
 let dateOfBirth=document.getElementById("Date of Birth");
