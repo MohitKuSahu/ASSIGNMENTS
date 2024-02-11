@@ -1,0 +1,7 @@
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\bin\Debug\CRUD_OPERATIONS_ADO.exe.config
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\bin\Debug\CRUD_OPERATIONS_ADO.exe
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\bin\Debug\CRUD_OPERATIONS_ADO.pdb
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\obj\Debug\CRUD_OPERATIONS_ADO.csproj.AssemblyReference.cache
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\obj\Debug\CRUD_OPERATIONS_ADO.csproj.CoreCompileInputs.cache
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\obj\Debug\CRUD_OPERATIONS_ADO.exe
+C:\Users\mohits\source\repos\CRUD_OPERATIONS_ADO\CRUD_OPERATIONS_ADO\obj\Debug\CRUD_OPERATIONS_ADO.pdb
