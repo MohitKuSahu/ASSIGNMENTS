@@ -1,0 +1,7 @@
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\bin\Debug\Extension&Genericclass.exe.config
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\bin\Debug\Extension&Genericclass.exe
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\bin\Debug\Extension&Genericclass.pdb
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\obj\Debug\Extension&Genericclass.csproj.AssemblyReference.cache
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\obj\Debug\Extension&Genericclass.csproj.CoreCompileInputs.cache
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\obj\Debug\Extension&Genericclass.exe
+C:\Users\mohits\source\repos\Extension&Genericclass\Extension&Genericclass\obj\Debug\Extension&Genericclass.pdb
