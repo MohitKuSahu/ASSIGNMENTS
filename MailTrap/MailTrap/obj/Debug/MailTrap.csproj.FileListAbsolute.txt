@@ -1,0 +1,7 @@
+C:\Users\mohits\source\repos\MailTrap\MailTrap\bin\Debug\MailTrap.exe.config
+C:\Users\mohits\source\repos\MailTrap\MailTrap\bin\Debug\MailTrap.exe
+C:\Users\mohits\source\repos\MailTrap\MailTrap\bin\Debug\MailTrap.pdb
+C:\Users\mohits\source\repos\MailTrap\MailTrap\obj\Debug\MailTrap.csproj.AssemblyReference.cache
+C:\Users\mohits\source\repos\MailTrap\MailTrap\obj\Debug\MailTrap.csproj.CoreCompileInputs.cache
+C:\Users\mohits\source\repos\MailTrap\MailTrap\obj\Debug\MailTrap.exe
+C:\Users\mohits\source\repos\MailTrap\MailTrap\obj\Debug\MailTrap.pdb
