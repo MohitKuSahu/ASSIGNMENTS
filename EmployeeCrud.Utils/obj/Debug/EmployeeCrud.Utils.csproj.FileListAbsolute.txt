@@ -1,0 +1,7 @@
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\bin\Debug\EmployeeCrud.Utils.dll.config
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\bin\Debug\EmployeeCrud.Utils.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\bin\Debug\EmployeeCrud.Utils.pdb
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\obj\Debug\EmployeeCrud.Utils.csproj.AssemblyReference.cache
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\obj\Debug\EmployeeCrud.Utils.csproj.CoreCompileInputs.cache
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\obj\Debug\EmployeeCrud.Utils.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.Utils\obj\Debug\EmployeeCrud.Utils.pdb
