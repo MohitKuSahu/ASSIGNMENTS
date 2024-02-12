@@ -1,0 +1,15 @@
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.DAL.dll.config
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.DAL.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.DAL.pdb
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.Utils.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EntityFramework.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.Utils.pdb
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EmployeeCrud.Utils.dll.config
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EntityFramework.xml
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\obj\Debug\EmployeeCrud.DAL.csproj.AssemblyReference.cache
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\obj\Debug\EmployeeCrud.DAL.csproj.CoreCompileInputs.cache
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\obj\Debug\EmployeeCrud.DAL.csproj.CopyComplete
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\obj\Debug\EmployeeCrud.DAL.dll
+D:\MINDFIRE\source\repos\EmployeeCrudEF\EmployeeCrud.DAL\obj\Debug\EmployeeCrud.DAL.pdb
