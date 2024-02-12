@@ -5,7 +5,7 @@
 }
 
 @media (max-width: 1143px) {
-   
+
     .flex-container1,.flex-container2,.flex-container3 {
       flex-direction: column;
       width: fit-content;
