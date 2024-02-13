@@ -1,6 +1,7 @@
 
 (function () {
     'use strict';
+    
 
     var forms = document.querySelectorAll('.needs-validation');
 
