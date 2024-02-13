@@ -2,7 +2,10 @@ bin/
 
 obj/
 
+<<<<<<< HEAD
 .vs/
 
 packages/
 
+=======
+>>>>>>> 337bcbc6b532f42cc5884526a24b9fec2901a432
