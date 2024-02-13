@@ -1,5 +1,6 @@
-﻿
+﻿using EmployeeCrud.Models;
 using EmployeeCrud.Utils;
+using EmployeeLayer.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,33 +13,21 @@ namespace EmployeeCrud.DAL
     {
         public static List<EmployeeInsert> ViewEmployee(string fileName)
         {
-            List<EmployeeInsert> allEmployee = new List<EmployeeInsert>();
-
+            List<EmployeeInsert> allEmployeesDisplay = new List<EmployeeInsert>();
             try
             {
-                using (EMPLOYEELISTEntities1 emp = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    var employees = emp.Employees.ToList();
-                    foreach (var employ in employees)
-                    {
-
-                        EmployeeInsert employeeInsert = new EmployeeInsert()
-                        {
-                            EmployeeID = employ.EmployeeID,
-                            EmployeeName = employ.EmployeeName,
-                            BranchID = (int)employ.BranchID,
-                            DepartmentID = (int)employ.DepartmentID
-                        };
-                        allEmployee.Add(employeeInsert);
-                    }
-
+                    List<Employee> allEmployees = stud.Employees.ToList();
+                    var mapper = Mapper.ViewMapper();
+                    allEmployeesDisplay = mapper.Map<List<Employee>, List<EmployeeInsert>>(allEmployees);
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
             }
-            return allEmployee;
+            return allEmployeesDisplay;
         }
 
         public static bool InsertEmployee(EmployeeInsert emp1, string fileName)
@@ -47,17 +36,11 @@ namespace EmployeeCrud.DAL
             {
                 using (EMPLOYEELISTEntities1 context = new EMPLOYEELISTEntities1())
                 {
-                    Employee emp = new Employee
-                    {
-                        EmployeeID = emp1.EmployeeID,
-                        EmployeeName = emp1.EmployeeName,
-                        BranchID = emp1.BranchID,
-                        DepartmentID = emp1.DepartmentID
-                    };
+                    var mapper = Mapper.InsertMapper();
+                    Employee Employee = mapper.Map<EmployeeInsert, Employee>(emp1);
 
-                    context.Employees.Add(emp);
+                    context.Employees.Add(Employee);
                     context.SaveChanges();
-
                     return true;
                 }
             }
@@ -72,18 +55,14 @@ namespace EmployeeCrud.DAL
         {
             try
             {
-                using (EMPLOYEELISTEntities1 context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    Employee EmployeeToUpdate = context.Employees.Find(EmployeeId);
-
+                    Employee EmployeeToUpdate = stud.Employees.Find(EmployeeId);
+                    var mapper = Mapper.UpdateMapper();
                     if (EmployeeToUpdate != null)
                     {
-                        EmployeeToUpdate.EmployeeName = EmployeeUpdate.EmployeeName;
-                        EmployeeToUpdate.BranchID = EmployeeUpdate.BranchID;
-                        EmployeeToUpdate.DepartmentID = EmployeeUpdate.DepartmentID;
-
-                        context.SaveChanges();
-
+                        mapper.Map(EmployeeUpdate, EmployeeToUpdate);
+                        stud.SaveChanges();
                         return true;
                     }
                     else
@@ -151,30 +130,21 @@ namespace EmployeeCrud.DAL
 
         public static List<BranchInsert> ViewBranch(string fileName)
         {
-            List<BranchInsert> allBranchs = null;
+            List<BranchInsert> displayBranchs = new List<BranchInsert>();
             try
             {
-                using (EMPLOYEELISTEntities1 Context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    List<Branch> allSem = Context.Branches.ToList();
-                    allBranchs = new List<BranchInsert>();
-                    foreach (var Branch in allSem)
-                    {
-                        BranchInsert bran = new BranchInsert
-                        {
-                            BranchID = Branch.BranchID,
-                            BranchName = Branch.BranchName,
-                            DepartmentID = (int)Branch.DepartmentID
-                        };
-                        allBranchs.Add(bran);
-                    }
+                    List<Branch> allBranchs = stud.Branches.ToList();
+                    var mapper = Mapper.ViewMapper();
+                    displayBranchs = mapper.Map<List<Branch>, List<BranchInsert>>(allBranchs);
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
             }
-            return allBranchs;
+            return displayBranchs;
         }
 
 
@@ -182,18 +152,12 @@ namespace EmployeeCrud.DAL
         {
             try
             {
-                using (EMPLOYEELISTEntities1 context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    Branch bran = new Branch
-                    {
-                        BranchName = emp1.BranchName,
-                        BranchID = emp1.BranchID,
-                        DepartmentID = emp1.DepartmentID
-                    };
-
-                    context.Branches.Add(bran);
-                    context.SaveChanges();
-
+                    var mapper = Mapper.InsertMapper();
+                    Branch Branch = mapper.Map<BranchInsert, Branch>(emp1);
+                    stud.Branches.Add(Branch);
+                    stud.SaveChanges();
                     return true;
                 }
             }
@@ -208,16 +172,15 @@ namespace EmployeeCrud.DAL
         {
             try
             {
-                using (EMPLOYEELISTEntities1 bran = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    Branch BranchToUpdate = bran.Branches.Find(BranchId);
-
+                    Branch BranchToUpdate = stud.Branches.Find(BranchId);
+                    var mapper = Mapper.UpdateMapper();
                     if (BranchToUpdate != null)
                     {
-                        BranchToUpdate.BranchName = BranchUpdate.BranchName;
-                        BranchToUpdate.DepartmentID = BranchUpdate.DepartmentID;
+                        mapper.Map(BranchUpdate, BranchToUpdate);
 
-                        bran.SaveChanges();
+                        stud.SaveChanges();
                         return true;
                     }
                     else
@@ -262,46 +225,33 @@ namespace EmployeeCrud.DAL
 
         public static List<DepartmentInsert> ViewDepartment(string fileName)
         {
-            List<DepartmentInsert> allDepartments = null;
+            List<DepartmentInsert> displayDepartments = new List<DepartmentInsert>();
             try
             {
-                using (EMPLOYEELISTEntities1 Context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    List<Department> allDep = Context.Departments.ToList();
-                    allDepartments = new List<DepartmentInsert>();
-                    foreach (var Department in allDep)
-                    {
-                        DepartmentInsert bran = new DepartmentInsert
-                        {
-                            DepartmentName = Department.DepartmentName,
-                            DepartmentID = (int)Department.DepartmentID
-                        };
-                        allDepartments.Add(bran);
-                    }
+                    List<Department> allDepartments = stud.Departments.ToList();
+                    var mapper = Mapper.ViewMapper();
+                    displayDepartments = mapper.Map<List<Department>, List<DepartmentInsert>>(allDepartments);
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
             }
-            return allDepartments;
+            return displayDepartments;
         }
 
         public static bool InsertDepartment(DepartmentInsert emp1, string fileName)
         {
             try
             {
-                using (EMPLOYEELISTEntities1 context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    Department bran = new Department
-                    {
-                        DepartmentName = emp1.DepartmentName,
-                        DepartmentID = emp1.DepartmentID
-                    };
-
-                    context.Departments.Add(bran);
-                    context.SaveChanges();
-
+                    var mapper = Mapper.InsertMapper();
+                    Department Department = mapper.Map<DepartmentInsert, Department>(emp1);
+                    stud.Departments.Add(Department);
+                    stud.SaveChanges();
                     return true;
                 }
             }
@@ -312,20 +262,19 @@ namespace EmployeeCrud.DAL
             }
         }
 
-        public static bool UpdateDepartment(int BranchId, DepartmentInsert DepartmentUpdate, string fileName)
+        public static bool UpdateDepartment(int DepartmentId, DepartmentInsert DepartmentUpdate, string fileName)
         {
             try
             {
-                using (EMPLOYEELISTEntities1 context = new EMPLOYEELISTEntities1())
+                using (EMPLOYEELISTEntities1 stud = new EMPLOYEELISTEntities1())
                 {
-                    Department DepartmentToUpdate = context.Departments.Find(BranchId);
-
+                    Department DepartmentToUpdate = stud.Departments.Find(DepartmentId);
+                    var mapper = Mapper.UpdateMapper();
                     if (DepartmentToUpdate != null)
                     {
+                        mapper.Map(DepartmentUpdate, DepartmentToUpdate);
 
-                        DepartmentToUpdate.DepartmentName = DepartmentUpdate.DepartmentName;
-
-                        context.SaveChanges();
+                        stud.SaveChanges();
                         return true;
                     }
                     else
@@ -368,6 +317,35 @@ namespace EmployeeCrud.DAL
             }
         }
 
+        public static List<CombinedData> GetCombinedData(string fileName)
+        {
+            try
+            {
+                using (var context = new EMPLOYEELISTEntities1())
+                {
+
+
+                    var combinedData = from emp in context.Employees
+                                       join branch in context.Branches on emp.BranchID equals branch.BranchID
+                                       join dep in context.Departments on emp.DepartmentID equals dep.DepartmentID
+                                       select new CombinedData
+                                       {
+                                           EmployeeID = emp.EmployeeID,
+                                           EmployeeName = emp.EmployeeName,
+                                           BranchName = branch.BranchName,
+                                           DepartmentName = dep.DepartmentName,
+                                       };
+
+                    return combinedData.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex, fileName);
+                return null;
+            }
+
+        }
     }
 }
 
