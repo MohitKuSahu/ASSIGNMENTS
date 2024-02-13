@@ -1,0 +1,16 @@
+System.IO.InvalidDataException: The file is not a valid Package file. If the file is encrypted, please supply the password in the constructor.
+   at OfficeOpenXml.Packaging.ZipPackage..ctor(Stream stream)
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at EmployeeCrud.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in D:\MINDFIRE\source\repos\EmployeeLayers\EmployeeCrud.Business\BusinessLayer.cs:line 87
+   at EmployeeCrud.Program.DetailsExcel() in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 232
+   at EmployeeCrud.Program.Crud() in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 164
+   at EmployeeCrud.Program.Main(String[] args) in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 20
+System.IO.InvalidDataException: The file is not a valid Package file. If the file is encrypted, please supply the password in the constructor.
+   at OfficeOpenXml.Packaging.ZipPackage..ctor(Stream stream)
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at EmployeeCrud.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in D:\MINDFIRE\source\repos\EmployeeLayers\EmployeeCrud.Business\BusinessLayer.cs:line 87
+   at EmployeeCrud.Program.DetailsExcel() in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 232
+   at EmployeeCrud.Program.Crud() in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 164
+   at EmployeeCrud.Program.Main(String[] args) in D:\MINDFIRE\source\repos\EmployeeLayers\Employee\Program.cs:line 20

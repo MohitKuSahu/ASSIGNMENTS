@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EMPLOYEELISTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="BranchName" Type="varchar" MaxLength="255" />
+          <Property Name="DepartmentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="255" />
+          <Property Name="BranchID" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+        </EntityType>
+        <EntityType Name="EmployeeDepartments">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Branch__Departme__4AB81AF0">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Branch__4D94879B">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Depart__4E88ABD4">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeD__Depar__52593CB8">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="EmployeeDepartments" Type="Self.EmployeeDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="EmployeeDepartments">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeD__Emplo__5165187F">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeDepartments" Type="Self.EmployeeDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeDepartments">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EMPLOYEELISTModelStoreContainer">
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeDepartments" EntityType="Self.EmployeeDepartments" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Branch__Departme__4AB81AF0" Association="Self.FK__Branch__Departme__4AB81AF0">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Branch" EntitySet="Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Branch__4D94879B" Association="Self.FK__Employee__Branch__4D94879B">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Depart__4E88ABD4" Association="Self.FK__Employee__Depart__4E88ABD4">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeD__Depar__52593CB8" Association="Self.FK__EmployeeD__Depar__52593CB8">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="EmployeeDepartments" EntitySet="EmployeeDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeD__Emplo__5165187F" Association="Self.FK__EmployeeD__Emplo__5165187F">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeDepartments" EntitySet="EmployeeDepartments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EMPLOYEELISTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="BranchName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Branch__Departme__4AB81AF0" FromRole="Branch" ToRole="Departments" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Branch__4D94879B" FromRole="Branch" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Branches" Relationship="Self.FK__Branch__Departme__4AB81AF0" FromRole="Departments" ToRole="Branch" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Depart__4E88ABD4" FromRole="Departments" ToRole="Employee" />
+          <NavigationProperty Name="Employees1" Relationship="Self.EmployeeDepartments" FromRole="Departments" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BranchID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK__Employee__Branch__4D94879B" FromRole="Employee" ToRole="Branch" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Employee__Depart__4E88ABD4" FromRole="Employee" ToRole="Departments" />
+          <NavigationProperty Name="Departments" Relationship="Self.EmployeeDepartments" FromRole="Employee" ToRole="Departments" />
+        </EntityType>
+        <Association Name="FK__Branch__Departme__4AB81AF0">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Branch__4D94879B">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Depart__4E88ABD4">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeDepartments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EMPLOYEELISTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <AssociationSet Name="FK__Branch__Departme__4AB81AF0" Association="Self.FK__Branch__Departme__4AB81AF0">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Branch" EntitySet="Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Branch__4D94879B" Association="Self.FK__Employee__Branch__4D94879B">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Depart__4E88ABD4" Association="Self.FK__Employee__Depart__4E88ABD4">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeDepartments" Association="Self.EmployeeDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EMPLOYEELISTModelStoreContainer" CdmEntityContainer="EMPLOYEELISTEntities">
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="EMPLOYEELISTModel.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EMPLOYEELISTModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EMPLOYEELISTModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EmployeeDepartments" TypeName="EMPLOYEELISTModel.EmployeeDepartments" StoreEntitySet="EmployeeDepartments">
+            <EndProperty Name="Departments">
+              <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
