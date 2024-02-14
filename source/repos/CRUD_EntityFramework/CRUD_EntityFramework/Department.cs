@@ -31,5 +31,5 @@ namespace CRUD_EntityFramework
         public virtual ICollection<Employee> Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees1 { get; set; }
-    }
+    }  
 }
