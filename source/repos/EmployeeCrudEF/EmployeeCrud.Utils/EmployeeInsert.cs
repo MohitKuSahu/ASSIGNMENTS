@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeeCrud.Utils
-{
+{ 
     public class EmployeeInsert
     {
         public int EmployeeID { get; set; }

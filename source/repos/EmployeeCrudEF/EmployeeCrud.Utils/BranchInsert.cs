@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeCrud.Utils
+namespace EmployeeCrud.Utils 
 {
     public class BranchInsert
     {

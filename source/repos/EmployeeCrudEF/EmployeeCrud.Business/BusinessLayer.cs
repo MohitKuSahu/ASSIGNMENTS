@@ -12,7 +12,7 @@ namespace EmployeeCrud.Business
         
         public static List<EmployeeInsert> ViewEmployee(string fileName)
         {
-            return DAL.DataLayer.ViewEmployee(fileName);
+            return DAL.DataLayer.ViewEmployee(fileName);  
         }
 
         public static bool InsertEmployee(EmployeeInsert emp1, string fileName)

@@ -15,7 +15,7 @@ if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems
 {
     return string.Empty;
 }
-
+ 
 WriteHeader(codeStringGenerator, fileManager);
 
 foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection))

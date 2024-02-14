@@ -10,7 +10,7 @@ namespace EmployeeCrud.Utils
     {
 
         public enum Op
-        {
+        { 
             ViewEmployee = 1,
             InsertEmployee,
             UpdateEmployee,

@@ -61,7 +61,7 @@ namespace EmployeeCrud.Utils
             }
             catch
             {
-                Console.WriteLine();
+                Console.WriteLine(); 
             }
         }
     }

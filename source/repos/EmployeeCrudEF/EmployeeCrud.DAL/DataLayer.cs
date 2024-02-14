@@ -29,7 +29,7 @@ namespace EmployeeCrud.DAL
                             BranchID = (int)employ.BranchID,
                             DepartmentID = (int)employ.DepartmentID
                         };
-                        allEmployee.Add(employeeInsert);
+                        allEmployee.Add(employeeInsert); 
                     }
 
                 }
