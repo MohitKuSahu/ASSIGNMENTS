@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6eddbd51b796423ba3256a38484dd2a9" Name="Diagram1">
-        <EntityTypeShape EntityType="EMPLOYEELISTModel.Branch" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMPLOYEELISTModel.Branch" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EMPLOYEELISTModel.Department" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EMPLOYEELISTModel.Employee" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMPLOYEELISTModel.Employee" Width="1.5" PointX="6.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="EMPLOYEELISTModel.FK__Branch__Departme__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="EMPLOYEELISTModel.FK__Employee__Branch__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="EMPLOYEELISTModel.FK__Employee__Depart__4E88ABD4" ManuallyRouted="false" />
@@ -15,4 +15,4 @@
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
-</edmx:Edmx>
+</edmx:Edmx> 
