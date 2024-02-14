@@ -1,5 +1,6 @@
 
-                                                            
+         
+         
 
 
 let firstname = document.getElementById("fname");
