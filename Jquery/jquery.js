@@ -126,6 +126,7 @@ function validateInput() {
 }
 
 
+
 // popup about input values
 function openModal() {
     var inputValues = {};
