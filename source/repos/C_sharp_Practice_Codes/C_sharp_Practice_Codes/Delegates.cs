@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 delegate void calculator(int x, int y);
 class Delegates
