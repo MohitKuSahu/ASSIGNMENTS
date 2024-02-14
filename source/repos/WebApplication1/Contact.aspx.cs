@@ -13,5 +13,19 @@ namespace WebApplication1
         {
 
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            // If ViewState values are not null, assign them to TextBoxes
+            if (Session["name"] != null)
+            {
+                TextBox2.Text = Session["name"].ToString();
+            }
+
+            if (Session["password"] != null)
+            {
+                TextBox3.Text = Session["password"].ToString();
+            }
+        }
     }
 }

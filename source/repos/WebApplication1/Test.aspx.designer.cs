@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Contact
+    public partial class Test
     {
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox TextBox3;
 
         /// <summary>
-        /// Button3 control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }
