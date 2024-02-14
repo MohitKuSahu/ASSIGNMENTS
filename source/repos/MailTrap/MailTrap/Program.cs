@@ -27,7 +27,7 @@ namespace MailTrap
                 IsBodyHtml = true,
             };
             client.Send(Mailmessage);
-            System.Console.WriteLine("Sent");
+            System.Console.WriteLine("Sent");   
         }
     }
 }
