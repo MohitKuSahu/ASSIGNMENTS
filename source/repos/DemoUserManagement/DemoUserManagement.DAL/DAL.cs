@@ -263,11 +263,10 @@ namespace DemoUserManagement.DAL
             {
                 using (var context = new FORMEntities())
                 {
-                    // Retrieve the user details from the database based on the user ID
+                   
                     var existingUser = context.UserDetails.FirstOrDefault(u => u.UserID == IdToUpdate);
 
 
-                    // Update user details
                     existingUser.FirstName = UserInfo.FirstName;
                     existingUser.MiddleName = UserInfo.MiddleName;
                     existingUser.LastName = UserInfo.LastName;
@@ -296,7 +295,7 @@ namespace DemoUserManagement.DAL
                     var presentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Present);
                     var permanentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Permanent);
 
-                    // Update addresses 
+                   
                     presentAddress.Address = ListofAddresses[0].Address;
                     permanentAddress.Address = ListofAddresses[1].Address;
 

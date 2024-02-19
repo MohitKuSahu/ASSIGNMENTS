@@ -201,7 +201,7 @@ namespace DemoUserManagement
         }
         protected string SaveFile(FileUpload fileUpload)
         {
-            string ExternalFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("ServerPath");
+            string ExternalFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("Path");
             if (!Directory.Exists(ExternalFolderPath))
             {
                 Directory.CreateDirectory(ExternalFolderPath);
