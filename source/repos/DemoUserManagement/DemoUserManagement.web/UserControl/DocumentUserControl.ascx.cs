@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System;
+using System.Linq;
 
 
 namespace DemoUserManagement.Web.User_Control
@@ -55,7 +56,7 @@ namespace DemoUserManagement.Web.User_Control
                         TimeStamp = DateTime.Now.ToString("d")
                     };
 
-                    BusinessLayer.AddDocument(document);    
+                    BusinessLayer.AddDocument(document);
                     BindGridView();
                 }
                 catch (Exception ex)
@@ -114,11 +115,12 @@ namespace DemoUserManagement.Web.User_Control
                 {
                     if (sortDirection == "ASC")
                     {
-                    
+                        documents = documents.OrderBy(d => GetPropertyValue(d, sortExpression)).ToList();
                     }
                     else
                     {
-                        
+                        documents = documents.OrderByDescending(d => GetPropertyValue(d, sortExpression)).ToList();
+                    }
                 }
 
                 DocumentGrid.DataSource = documents;
