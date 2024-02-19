@@ -18,11 +18,11 @@
     </main>
 
 
-     UserName: <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+     UserName: <asp:TextBox ID="TextBox2" runat="server" Width="158px"></asp:TextBox>
  <br />
- Password: <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+ Password: <asp:TextBox ID="TextBox3" runat="server" Width="159px"></asp:TextBox>
  <br />
- <asp:Button ID="Button3" runat="server" onclick="Button3_Click"  Text="Restore" />
+ <asp:Button ID="Button3" runat="server" onclick="Button3_Click"  Text="Restore" Width="152px" />
 </asp:Content>
 
 
