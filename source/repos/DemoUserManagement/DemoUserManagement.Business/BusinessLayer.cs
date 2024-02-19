@@ -41,8 +41,12 @@ namespace DemoUserManagement.Business
         {
             return DAL.DAL.InsertNotes(InputNoteText, UserId, ObjectType);
         }
+        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
+        {
+            return DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId);
+        }
 
-        public static List<NoteModel> GetNotes(int UserId, int ObjectType)
+            public static List<NoteModel> GetNotes(int UserId, int ObjectType)
         {
             return DAL.DAL.GetNotes(UserId, ObjectType);
         }
@@ -87,6 +91,7 @@ namespace DemoUserManagement.Business
             return DAL.DAL.TotalUsers();
         }
 
+        
 
         public static bool InsertDocument(string FileName, string uniqueGuid, int ObjectID, int ObjectType, int DocumentType)
         {

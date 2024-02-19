@@ -183,8 +183,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="UserControl\Document.ascx" />
-    <Content Include="UserControl\Notes.ascx" />
+    <Content Include="UserControl\DocumentUserControl.ascx" />
+    <Content Include="UserControl\NoteUserControl.ascx" />
     <Content Include="UserDetails.aspx" />
     <Content Include="Users.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -241,19 +241,19 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Document.ascx.cs">
-      <DependentUpon>Document.ascx</DependentUpon>
+    <Compile Include="UserControl\DocumentUserControl.ascx.cs">
+      <DependentUpon>DocumentUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\Document.ascx.designer.cs">
-      <DependentUpon>Document.ascx</DependentUpon>
+    <Compile Include="UserControl\DocumentUserControl.ascx.designer.cs">
+      <DependentUpon>DocumentUserControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Notes.ascx.cs">
-      <DependentUpon>Notes.ascx</DependentUpon>
+    <Compile Include="UserControl\NoteUserControl.ascx.cs">
+      <DependentUpon>NoteUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\Notes.ascx.designer.cs">
-      <DependentUpon>Notes.ascx</DependentUpon>
+    <Compile Include="UserControl\NoteUserControl.ascx.designer.cs">
+      <DependentUpon>NoteUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserDetails.aspx.cs">
       <DependentUpon>UserDetails.aspx</DependentUpon>

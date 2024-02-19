@@ -1,5 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NoteUserControl.ascx.cs" Inherits="DemoUserManagement.UserControl.NoteUserControl" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NoteUserControl.ascx.cs" Inherits="DemoUserManagement.Web.User_Control.NoteUserControl" %>
 
+<h4>Add notes in this page</h4>
 <style>
     .notes {
         height: 100px;
@@ -31,10 +32,10 @@
                 PageSize="3" OnSorting="NotesGrid_Sorting" OnPageIndexChanging="NotesGrid_PageIndexChanging" EnableViewState="true">
                 <Columns>
                     <asp:BoundField HeaderText="Note ID" DataField="NoteID" ItemStyle-Width="150px" SortExpression="NoteID" />
-                    <asp:BoundField HeaderText="Note" DataField="NoteText" ItemStyle-Width="150px" SortExpression="NoteData" />
+                    <asp:BoundField HeaderText="Note" DataField="NoteData" ItemStyle-Width="150px" SortExpression="NoteData" />
                     <asp:BoundField HeaderText="Object ID" DataField="ObjectID" ItemStyle-Width="150px" SortExpression="ObjectID" />
                     <asp:BoundField HeaderText="Object Type" DataField="ObjectType" ItemStyle-Width="150px" SortExpression="ObjectType" />
-                    <asp:BoundField HeaderText="Added On" DataField="CreatedDate " ItemStyle-Width="300px" SortExpression="DateTimeAdded" />
+                    <asp:BoundField HeaderText="Added On" DataField="DateTimeAdded" ItemStyle-Width="300px" SortExpression="DateTimeAdded" />
                 </Columns>
             </asp:GridView>
         </div>

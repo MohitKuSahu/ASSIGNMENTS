@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DemoUserManagement.UserControl
+namespace DemoUserManagement.Web.User_Control
 {
 
 

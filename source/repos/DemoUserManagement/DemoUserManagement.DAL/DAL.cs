@@ -317,7 +317,7 @@ namespace DemoUserManagement.DAL
             return flag;
         }
 
-
+       
         public static bool InsertNotes(string InputNoteText, int UserId, int ObjectType)
         {
             bool flag = false;
@@ -385,6 +385,30 @@ namespace DemoUserManagement.DAL
             return ListofNotes;
         }
 
+        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
+        {
+            List<NoteModel> notes = new List<NoteModel>();
+
+            using (var context = new FORMEntities())
+            {
+                notes = context.Notes
+                    .Where(n => n.ObjectID == objectId)
+                    .OrderBy(n => n.NoteID)
+                    .Skip(pageIndex * pageSize)
+                    .Take(pageSize)
+                    .Select(n => new NoteModel
+                    {
+                        NoteID = (int)n.NoteID,
+                        NoteText = n.NoteText,
+                        ObjectID = n.ObjectID,
+                        ObjectType = (int)n.ObjectType,
+                        CreatedDate = n.CreatedDate.ToString()
+                    })
+                    .ToList();
+            }
+            return notes;
+        }
+       
         public static List<string> GetAllCountries()
         {
             List<string> countriesList = new List<string>();
