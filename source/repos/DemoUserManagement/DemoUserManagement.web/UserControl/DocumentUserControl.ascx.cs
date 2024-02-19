@@ -43,7 +43,7 @@ namespace DemoUserManagement.Web.User_Control
 
                     fileUpload.SaveAs(filePath);
 
-                    // Get the selected document type ID from the dropdown list
+                 
                     int documentTypeId = int.Parse(ddlDocumentType.SelectedValue);
 
                     DocumentModel document = new DocumentModel

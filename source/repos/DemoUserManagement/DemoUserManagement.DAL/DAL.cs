@@ -54,13 +54,11 @@ namespace DemoUserManagement.DAL
                         Documents = userModel.Documents,
                     };
 
-                    // pass it to context API 
                     context.UserDetails.Add(newUser);
                     context.SaveChanges();
 
 
-                int RoleId = 1;
-                InsertedUser["RoleId"] = RoleId;
+               
                 InsertedUser["UserID"] = newUser.UserID;
 
 
@@ -336,13 +334,12 @@ namespace DemoUserManagement.DAL
                     };
 
 
-                    // Add the new note to the context
                     context.Notes.Add(newNote);
 
-                    // Save changes to the database
+                  
                     context.SaveChanges();
                     flag = true;
-                    // Refresh the displayed notes
+                 
 
                 }
             }
@@ -416,12 +413,12 @@ namespace DemoUserManagement.DAL
             {
                 using (var context = new FORMEntities())
                 {
-                    // Retrieve all countries from the Country table
+                   
                     var countries = context.Countries
                         .Select(c => c.CountryName)
                         .ToList();
 
-                    // Now, 'countries' contains a list of all country names
+                   
                     countriesList.AddRange(countries);
                 }
             }
@@ -440,7 +437,7 @@ namespace DemoUserManagement.DAL
             {
                 using (var context = new FORMEntities())
                 {
-                    // Retrieve the states for the selected country from the State table
+               
                     statesList = context.States
                         .Where(s => s.Country.CountryName == CountryName)
                         .Select(s => s.StateName)
@@ -490,13 +487,13 @@ namespace DemoUserManagement.DAL
             {
                 IQueryable<UserDetail> query = context.UserDetails;
 
-                // Apply dynamic sorting
+                
                 query = ApplySorting(query, sortExpression, sortDirection);
 
-                // Apply paging
+               
                 List<UserDetail> users = query.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
-                // Map the result to UserDetailsModel and return the result
+               
                 UsersList = users.Select(userModel => new UserModel
                 {
                     UserID = userModel.UserID,
@@ -544,7 +541,7 @@ namespace DemoUserManagement.DAL
                 case "LastName":
                     query = (sortDirection == "ASC") ? query.OrderBy(u => u.LastName) : query.OrderByDescending(u => u.LastName);
                     break;
-                    // Add more cases as needed for other properties
+                    
             }
 
             return query;
@@ -610,7 +607,7 @@ namespace DemoUserManagement.DAL
                         TimeStamp = DateTime.Now.ToString(),
                     };
 
-                    // Add the document to the context and save changes
+                  
                     context.Documents.Add(TempDocument);
                     context.SaveChanges();
                     flag = true;
