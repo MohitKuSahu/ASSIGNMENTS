@@ -456,6 +456,24 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.TextBox password;
 
         /// <summary>
+        /// NotesUserControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DemoUserManagement.UserControl.NotesUserControl NotesUserControl;
+
+        /// <summary>
+        /// DocumentUserControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DemoUserManagement.Web.User_Control.DocumentUserControl DocumentUserControl;
+
+        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

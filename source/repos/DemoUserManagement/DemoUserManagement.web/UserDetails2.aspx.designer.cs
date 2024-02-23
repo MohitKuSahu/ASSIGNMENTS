@@ -11,25 +11,25 @@ namespace DemoUserManagement
 {
 
 
-    public partial class SiteMaster
+    public partial class UserDetails2
     {
 
         /// <summary>
-        /// sdf control.
+        /// NotesUserControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm sdf;
+        protected global::DemoUserManagement.UserControl.NotesUserControl NotesUserControl;
 
         /// <summary>
-        /// MainContent control.
+        /// DocumentUserControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::DemoUserManagement.Web.User_Control.DocumentUserControl DocumentUserControl;
     }
 }

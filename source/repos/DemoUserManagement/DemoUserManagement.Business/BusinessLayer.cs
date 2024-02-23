@@ -12,8 +12,11 @@ namespace DemoUserManagement.Business
 {
     public class BusinessLayer
     {
-        
-       
+
+        public static UserModel GetUserById(int userId)
+        {
+            return DAL.DAL.GetUserById(userId);
+        }
         public static Dictionary<string, int> InsertUser(UserModel NewUser, List<AddressModel> ListofAddresses)
         {
             return DAL.DAL.InsertUser(NewUser, ListofAddresses);
@@ -30,14 +33,24 @@ namespace DemoUserManagement.Business
             return DAL.DAL.GetAddresses(UserId);
         }
 
+        public static int IsUser(string email, string password)
+        {
+            return DAL.DAL.IsUser(email, password);
+        }
 
-        public static bool UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
+        public static bool IsAdmin(int userId)
+        {
+            return DAL.DAL.IsAdmin(userId); 
+        }
+
+
+            public static bool UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
         {
             return DAL.DAL.UpdateUser(UserInfo, ListofAddresses, IdToUpdate);
 
         }
 
-        public static  bool InsertNotes(string InputNoteText, int UserId, int ObjectType)
+        public static bool InsertNotes(string InputNoteText, int UserId, int ObjectType)
         {
             return DAL.DAL.InsertNotes(InputNoteText, UserId, ObjectType);
         }
@@ -46,12 +59,15 @@ namespace DemoUserManagement.Business
             return DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId);
         }
 
-            public static List<NoteModel> GetNotes(int UserId, int ObjectType)
+
+
+        public void AddNote(NoteModel note)
         {
-            return DAL.DAL.GetNotes(UserId, ObjectType);
+            DAL.DAL noteDAL = new DAL.DAL();
+            noteDAL.AddNote(note);
         }
 
-        public static  List<UserModel> GetAllUsers()
+        public static List<UserModel> GetAllUsers()
         {
             return DAL.DAL.GetAllUsers();
         }
@@ -91,7 +107,7 @@ namespace DemoUserManagement.Business
             return DAL.DAL.TotalUsers();
         }
 
-        
+
 
         public static bool InsertDocument(string FileName, string uniqueGuid, int ObjectID, int ObjectType, int DocumentType)
         {
@@ -123,6 +139,26 @@ namespace DemoUserManagement.Business
         public static int GetTotalDocuments(int objectId)
         {
             return DAL.DAL.GetTotalDocuments(objectId);
+        }
+
+        public int GetTotalNotes(int userId)
+        {
+            DAL.DAL notesDAL = new DAL.DAL();
+            return notesDAL.GetTotalNotes(userId);
+        }
+        public static List<DocumentModel> GetDocuments(int pageIndex, int pageSize, int objectId)
+        {
+            return DAL.DAL.GetDocuments(pageIndex, pageSize, objectId);
+        }
+
+        public static bool EmailExists(string email)
+        {
+            return DAL.DAL.EmailExists(email);
+        }
+
+        public static bool CheckUserEmail(string userId, string email)
+        {
+            return DAL.DAL.UserEmail(userId, email);
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System;
 using System.Linq;
+using System.Web.Services.Description;
+using System.Data.Entity.Core.Common.CommandTrees;
 
 
 namespace DemoUserManagement.Web.User_Control
@@ -22,14 +24,12 @@ namespace DemoUserManagement.Web.User_Control
         {
             if (!IsPostBack)
             {
-                ddlDocumentType.DataSource = BusinessLayer.GetDocumentType();
-                ddlDocumentType.DataBind();
                 ViewState["ObjectId"] = ObjectId;
                 BindGridView();
             }
         }
 
-        protected void btnUpload_Click(object sender, EventArgs e)
+        protected void BtnUpload_Click(object sender, EventArgs e)
         {
             if (fileUpload.HasFile)
             {
@@ -38,27 +38,33 @@ namespace DemoUserManagement.Web.User_Control
                     string filename = Path.GetFileName(fileUpload.FileName);
                     string fileExtension = Path.GetExtension(filename);
                     string guid = Guid.NewGuid().ToString();
-                    string folderPath = Server.MapPath("~/UploadDocuments/");
+                    string folderPath = Server.MapPath("~/Output/");
                     string filePath = Path.Combine(folderPath, guid + fileExtension);
 
                     fileUpload.SaveAs(filePath);
 
-                 
-                    int documentTypeId = int.Parse(ddlDocumentType.SelectedValue);
+
+
 
                     DocumentModel document = new DocumentModel
                     {
                         ObjectID = Convert.ToInt32(ViewState["ObjectId"]),
                         ObjectType = (int)ObjectType.UserForm,
-                        DocumentType = documentTypeId,
                         DocumentOriginalName = filename,
                         DocumentGuidName = guid + fileExtension,
                         TimeStamp = DateTime.Now.ToString("d")
                     };
 
                     BusinessLayer.AddDocument(document);
+
+
+
+              
                     BindGridView();
+
+
                 }
+
                 catch (Exception ex)
                 {
                     Logger.AddData(ex);
@@ -100,32 +106,28 @@ namespace DemoUserManagement.Web.User_Control
         {
             try
             {
-                int pageIndex = DocumentGrid.PageIndex;
-                int pageSize = DocumentGrid.PageSize;
-                string sortExpression = ViewState["SortExpression"] as string ?? "DocumentId";
-                string sortDirection = ViewState["SortDirection"] as string ?? "ASC";
+                int CurrentPageIndex = DocumentGrid.PageIndex;
+                int PageSize = DocumentGrid.PageSize;
+                string SortExpression = ViewState["SortExpression"] as string ?? "DocumentID";
+                string SortDirection = ViewState["SortDirection"] as string ?? "ASC";
 
-                int totalDocuments =BusinessLayer.GetTotalDocuments(Convert.ToInt32(ViewState["ObjectId"]));
-                int totalPages = (int)Math.Ceiling((double)totalDocuments / pageSize);
 
-                DocumentGrid.VirtualItemCount = totalDocuments;
-                List<DocumentModel> documents = BusinessLayer.GetUploadedDocuments(pageIndex, pageSize, Convert.ToInt32(ViewState["ObjectId"]));
+                DocumentGrid.VirtualItemCount = BusinessLayer.GetTotalDocuments(Convert.ToInt32(ViewState["ObjectId"]));
 
-                if (!string.IsNullOrEmpty(sortExpression))
+                List<DocumentModel> ListofDocuments = BusinessLayer.GetDocuments(CurrentPageIndex,PageSize, Convert.ToInt32(ViewState["ObjectId"]));
+                if (!string.IsNullOrEmpty(SortExpression))
                 {
-                    if (sortDirection == "ASC")
+                    if (SortDirection == "ASC")
                     {
-                        documents = documents.OrderBy(d => GetPropertyValue(d, sortExpression)).ToList();
+                        ListofDocuments = ListofDocuments.OrderBy(n => GetPropertyValue(n, SortExpression)).ToList();
                     }
                     else
                     {
-                        documents = documents.OrderByDescending(d => GetPropertyValue(d, sortExpression)).ToList();
+                        ListofDocuments = ListofDocuments.OrderByDescending(n => GetPropertyValue(n, SortExpression)).ToList();
                     }
                 }
-
-                DocumentGrid.DataSource = documents;
+                DocumentGrid.DataSource = ListofDocuments;
                 DocumentGrid.DataBind();
-                DocumentGrid.PagerSettings.PageButtonCount = totalPages;
             }
             catch (Exception ex)
             {

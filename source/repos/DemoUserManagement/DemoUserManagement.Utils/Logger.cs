@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,32 +11,32 @@ namespace DemoUserManagement.Utils
 {
     public class Logger
     {
-        public static void AddData(Exception logException)
+        public static void AddData(Exception inputData)
         {
-            string logFilePath = "D:\\MINDFIRE\\source\\repos\\DemoUserManagement\\DemoUserManagement.web\\Logs";
+            string fileName = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            string logToFileSetting = ConfigurationManager.AppSettings["LogToFile"];
+      
 
-            try
+            bool logToFile = !string.IsNullOrEmpty(logToFileSetting) && bool.TryParse(logToFileSetting, out bool logToFileValue) && logToFileValue;
+
+
+            if (logToFile)
             {
-                if (!File.Exists(logFilePath))
-                {
-                    // If the file doesn't exist, create it
-                    using (FileStream fs = File.Create(logFilePath))
-                    {
-
-                    }
-                }
-
-                // Append the log data to the file
-                using (StreamWriter writer = new StreamWriter(logFilePath, true))
-                {
-                    writer.WriteLine($"{DateTime.Now}: {logException}");
-                }
+                LogToFile(inputData, fileName);
             }
-            catch (Exception ex)
+
+        }
+
+        private static void LogToFile(Exception inputData, string fileName)
+        {
+            string file = ConfigurationManager.AppSettings["LogFileFolderPath"] + fileName;
+            using (StreamWriter writer = new StreamWriter(file, true))
             {
-                Console.WriteLine($"Error while writing to log file: {ex.Message}");
+                writer.WriteLine(inputData);
             }
         }
 
+       
     }
+
 }

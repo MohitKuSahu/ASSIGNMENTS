@@ -1,6 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="UserDetails.aspx.cs" Inherits="DemoUserManagement.UserDetails" %>
+<%@ Register Src="~/UserControl/NotesUserControl.ascx" TagPrefix="uc1" TagName="NotesUserControl" %>
+ <%@ Register Src="~/UserControl/DocumentUserControl.ascx" TagPrefix="uc1" TagName="DocumentUserControl"%>
+
+
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+  
 
     <main>
         <script type="text/javascript">
@@ -140,8 +146,8 @@
 
                         <asp:Label ID="lblMaritalStatus" runat="server" AssociatedControlID="Status"> STATUS:</asp:Label>
                         <asp:RadioButtonList ID="Status" runat="server" RepeatDirection="Horizontal">
-                            <asp:ListItem Text="Married" Value="married" />
-                            <asp:ListItem Text="Unmarried" Value="unmarried" />
+                            <asp:ListItem Text="Married" Value="Married" />
+                            <asp:ListItem Text="Unmarried" Value="Unmarried" />
                         </asp:RadioButtonList>
                     </div>
 
@@ -422,6 +428,12 @@
                 </div>
 
             </div>
+
+
+            <uc1:NotesUserControl runat="server" id="NotesUserControl" />
+            <br />
+            <uc1:DocumentUserControl runat="server" id="DocumentUserControl" />
+            <br />
 
 
 

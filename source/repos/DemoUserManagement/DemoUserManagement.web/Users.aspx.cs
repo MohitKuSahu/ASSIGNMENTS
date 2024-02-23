@@ -7,11 +7,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DemoUserManagement.Business;
 using DemoUserManagement.Models;
+using DemoUserManagement.Web;
 
 
 namespace DemoUserManagement
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class Users : BasePage
     {
 
         protected void Page_Load(object sender, EventArgs e)

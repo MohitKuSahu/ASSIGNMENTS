@@ -13,10 +13,10 @@ namespace DemoUserManagement.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FORMEntities : DbContext
+    public partial class FORMEntities1 : DbContext
     {
-        public FORMEntities()
-            : base("name=FORMEntities")
+        public FORMEntities1()
+            : base("name=FORMEntities1")
         {
         }
     
@@ -29,7 +29,9 @@ namespace DemoUserManagement.DAL
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     }
 }

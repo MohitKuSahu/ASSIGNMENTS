@@ -2,6 +2,7 @@
 using DemoUserManagement.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DemoUserManagement.Business;
 using System.Web.Services.Description;
+using DemoUserManagement.DAL;
+using System.Xml.Linq;
 
 namespace DemoUserManagement
 {
@@ -19,21 +22,58 @@ namespace DemoUserManagement
         {
 
 
-            if (!IsPostBack && (Request.QueryString.Count == 0))
+            if (!IsPostBack)
             {
                 LoadCountriesAndStates();
-            }
 
-         
+                string userIdParam = Request.QueryString["Id"];
+                if (int.TryParse(userIdParam, out int userId))
+                {
+                    LoadDetails(userId);
+                    NotesUserControl.ObjectId = userId;
+                    DocumentUserControl.ObjectId = userId;
+                }
+                if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
+                {
+                    NotesUserControl.Visible = true;
+                    DocumentUserControl.Visible = true;
+                }
+                else
+                {
+                    NotesUserControl.Visible = false;
+                    DocumentUserControl.Visible = false;
+                }
+            }
 
 
         }
+
+        private void LoadDetails(int userId)
+        {
+            ShowButton(true);
+            PopulateValuesIntoForm(userId);
+        }
+        private void ShowButton(bool button)
+        {
+            if (button)
+            {
+                btnSubmit.Visible = true;
+                btnReset.Visible = true;
+            }
+            else
+            {
+                btnSubmit.Visible = true;
+                btnReset.Visible = false;
+            }
+        }
+
+
         private void LoadCountriesAndStates()
         {
-           
+
             List<string> countries = BusinessLayer.GetAllCountries();
 
-           
+
             ddlPresentCountry.DataSource = countries;
             ddlPresentCountry.DataBind();
 
@@ -51,7 +91,7 @@ namespace DemoUserManagement
         }
         public void DdlPresentCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
             string selectedCountry = ddlPresentCountry.SelectedValue;
 
             List<string> StatesForCountry = BusinessLayer.GetStatesForCountry(selectedCountry);
@@ -63,7 +103,7 @@ namespace DemoUserManagement
 
         public void DdlPermanentCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
             string selectedCountry = ddlPermanentCountry.SelectedValue;
 
             List<string> StatesForCountry = BusinessLayer.GetStatesForCountry(selectedCountry);
@@ -79,11 +119,11 @@ namespace DemoUserManagement
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
 
-                   
+
 
             (UserModel UserInfo, List<AddressModel> ListofAddresses) = TakeValuesFromForm();
 
-            
+
             if (Request.QueryString["id"] != null)
             {
                 UpdateUser(UserInfo, ListofAddresses, int.Parse(Request.QueryString["id"]));
@@ -96,16 +136,16 @@ namespace DemoUserManagement
         }
         private void ClearTextBoxes(Control parent)
         {
-           
+
             foreach (Control control in parent.Controls)
             {
-               
+
                 if (control is TextBox)
                 {
                     ((TextBox)control).Text = string.Empty;
                 }
 
-              
+
                 if (control.HasControls())
                 {
                     ClearTextBoxes(control);
@@ -115,7 +155,7 @@ namespace DemoUserManagement
         public void InsertNewUser(UserModel NewUser, List<AddressModel> ListofAddresses)
         {
             Dictionary<string, int> InsertedUser = BusinessLayer.InsertUser(NewUser, ListofAddresses);
-          
+
 
             string docFileName = string.Empty;
             string photoFileName = string.Empty;
@@ -135,10 +175,11 @@ namespace DemoUserManagement
             if (InsertedUser["flag"] == 1 && InsertedUser["RoleId"] == 1) Response.Redirect("~/Users.aspx");
             else if (InsertedUser["flag"] == 1 && InsertedUser["RoleId"] == 2) UpdateUser(NewUser, ListofAddresses, InsertedUser["UserID"]);
 
+
         }
         public void UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
         {
-            if (BusinessLayer.UpdateUser(UserInfo, ListofAddresses, IdToUpdate)) Response.Redirect("~/Users.aspx?id=" + IdToUpdate);
+            if (BusinessLayer.UpdateUser(UserInfo, ListofAddresses, IdToUpdate)) Response.Redirect("~/UserDetails.aspx?id=" + IdToUpdate);
         }
         public (UserModel, List<AddressModel>) TakeValuesFromForm()
         {
@@ -147,42 +188,42 @@ namespace DemoUserManagement
 
             UserModel UserInfo = new UserModel
             {
-                FirstName =fname.Text,
+                FirstName = fname.Text,
                 MiddleName = mname.Text,
                 LastName = lname.Text,
-                FatherName = fathername.Text,   
+                FatherName = fathername.Text,
                 MotherName = mothername.Text,
-                GuardianName=gname.Text,
+                GuardianName = gname.Text,
                 Password = password.Text,
                 PhoneNumber = phn.Text,
                 AlternatePhoneNumber = altn.Text,
                 Email = email.Text,
                 DOB = formattedDateOfBirth,
-                Documents=documentsInput.Text,
+                Documents = documentsInput.Text,
                 Status = Status.SelectedValue,
-                Gender=Gender.SelectedValue,
-                WorkExperience = WorkExperience.Text,
+                Gender = Gender.SelectedValue,
+                WorkExperience = WorkExperience.SelectedValue,
                 Board10th = Board10.Text,
-                Board12th= Board12.Text,
-                Percentage10th=int.Parse(percent10.Text),
-                Percentage12th=int.Parse(percent12.Text),
-                PercentageBTECH=int.Parse(percentB_Tech.Text),
-                Institute10th=institutename10.Text,
-                Institute12th=institutename12.Text,
-                InstituteBTECH= institutenameB_Tech.Text,
-                BloodGroup=bloodGroupInput.Text
+                Board12th = Board12.Text,
+                Percentage10th = int.Parse(percent10.Text),
+                Percentage12th = int.Parse(percent12.Text),
+                PercentageBTECH = int.Parse(percentB_Tech.Text),
+                Institute10th = institutename10.Text,
+                Institute12th = institutename12.Text,
+                InstituteBTECH = institutenameB_Tech.Text,
+                BloodGroup = bloodGroupInput.Text
             };
 
-            List<int> ids = BusinessLayer.GetCountryAndStateID(ddlPresentCountry.SelectedValue, ddlPresentState.SelectedValue);
+            List<int> ids1 = BusinessLayer.GetCountryAndStateID(ddlPresentCountry.SelectedValue, ddlPresentState.SelectedValue);
 
 
             AddressModel PresentAddress = new AddressModel
             {
                 Address = address1.Text,
                 Type = (int)Utility.AddressType.Present,
-                CountryID = ids[0],
-                StateID = ids[1]
-               
+                CountryID = ids1[0],
+                StateID = ids1[1]
+
 
             };
 
@@ -196,7 +237,7 @@ namespace DemoUserManagement
                 StateID = ids2[1]
 
             };
-            List<AddressModel> ListofAddresses = new List<AddressModel> { PresentAddress, PermanentAddress };   
+            List<AddressModel> ListofAddresses = new List<AddressModel> { PresentAddress, PermanentAddress };
             return (UserInfo, ListofAddresses);
         }
         protected string SaveFile(FileUpload fileUpload)
@@ -208,12 +249,12 @@ namespace DemoUserManagement
             }
 
 
-           
+
             Guid uniqueGuid = Guid.NewGuid();
 
             string fileExtension = Path.GetExtension(fileUpload.FileName);
 
-        
+
             string uniqueFileName = uniqueGuid.ToString() + fileExtension;
 
             fileUpload.SaveAs(ExternalFolderPath + uniqueFileName);
@@ -228,19 +269,19 @@ namespace DemoUserManagement
             fname.Text = UserDetails.FirstName;
             mname.Text = UserDetails.MiddleName;
             lname.Text = UserDetails.LastName;
+            fathername.Text = UserDetails.FatherName;
+            lname.Text = UserDetails.LastName;
             password.Text = UserDetails.Password;
             phn.Text = UserDetails.PhoneNumber;
             altn.Text = UserDetails.AlternatePhoneNumber;
             email.Text = UserDetails.Email;
             dob.Text = UserDetails.DOB;
             Status.SelectedValue = UserDetails.Status;
-          
 
-    
-            //permanent address
+
             List<string> Names = BusinessLayer.GetCountryAndStateNames(ListofAddresses[1].CountryID, ListofAddresses[1].StateID);
 
-           
+
             List<string> countries = BusinessLayer.GetAllCountries();
             for (int i = 0; i < countries.Count; i++) ddlPermanentCountry.Items.Add(countries[i]);
             ddlPermanentCountry.SelectedValue = Names[0];
@@ -249,9 +290,8 @@ namespace DemoUserManagement
             for (int i = 0; i < StatesForCountry.Count; i++) ddlPermanentState.Items.Add(StatesForCountry[i]);
             ddlPermanentState.SelectedValue = Names[1];
 
-           address1_.Text = ListofAddresses[1].Address;
+            address1_.Text = ListofAddresses[1].Address;
 
-            // present address
             List<string> Names2 = BusinessLayer.GetCountryAndStateNames(ListofAddresses[0].CountryID, ListofAddresses[0].StateID);
 
             List<string> countries2 = BusinessLayer.GetAllCountries();

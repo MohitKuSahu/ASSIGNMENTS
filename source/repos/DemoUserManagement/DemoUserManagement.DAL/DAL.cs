@@ -2,7 +2,9 @@
 using DemoUserManagement.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -14,6 +16,83 @@ namespace DemoUserManagement.DAL
 {
     public class DAL
     {
+        public static int IsUser(string email, string password)
+        {
+            int userId = 0;
+            try
+            {
+                using (var context = new FORMEntities1())
+                {
+                    if ((email != "") && password != "")
+                    {
+                        var user = context.UserDetails.Single(x => x.Email == email);
+                        if (user.Password == password)
+                        {
+                            userId = user.UserID;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+            return userId;
+        }
+
+
+
+        public static UserModel GetUserById(int userId)
+        {
+            UserModel user = null;
+
+            using (var context = new FORMEntities1())
+            {
+                user = context.UserDetails.Where(u => u.UserID == userId).Select(u => new UserModel
+                {
+                    FirstName = u.FirstName,
+                    MiddleName = u.MiddleName,
+                    LastName = u.LastName,
+                    FatherName = u.FatherName,
+                    MotherName = u.MotherName,
+                    Email = u.Email,
+                    Password = u.Password,
+                    DOB = u.DOB,
+                    BloodGroup = u.BloodGroup,
+                    PhoneNumber = u.PhoneNumber,
+                    AlternatePhoneNumber = u.AlternatePhoneNumber,
+                    GuardianName = u.GuardianName,
+                    Gender = u.Gender,
+                    Status = u.Status,
+                    WorkExperience = u.WorkExperience,
+                    Board10th = u.Board10th,
+                    Board12th = u.Board12th,
+                    Institute12th = u.Institue12th,
+                    Institute10th = u.institue10th,
+                    InstituteBTECH = u.InstitueBTECH,
+                    Percentage10th = (int)u.Percentage10th,
+                    Percentage12th =(int) u.Percentage12th,
+                    PercentageBTECH = (int)u.PercentageBTECH,
+                    Documents = u.Documents,
+                })
+                    .FirstOrDefault();
+            }
+            return user;
+        }
+
+
+        public static bool IsAdmin(int userId)
+        {
+            using (var context = new FORMEntities1())
+            {
+                var isAdmin = (from ur in context.UserRoles
+                               join r in context.Roles on ur.RoleID equals r.RoleID
+                               where ur.UserID == userId && r.IsAdmin == 1
+                               select r).Any();
+
+                return isAdmin;
+            }
+        }
 
         public static Dictionary<string, int> InsertUser(UserModel userModel, List<AddressModel> ListofAddresses)
         {
@@ -23,7 +102,7 @@ namespace DemoUserManagement.DAL
 
             InsertedUser["flag"] = 0; // flag - 0 
 
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
 
                     var newUser = new UserDetail
@@ -54,11 +133,13 @@ namespace DemoUserManagement.DAL
                         Documents = userModel.Documents,
                     };
 
+                    // pass it to context API 
                     context.UserDetails.Add(newUser);
                     context.SaveChanges();
 
 
-               
+             
+                InsertedUser["RoleId"] = 1;
                 InsertedUser["UserID"] = newUser.UserID;
 
 
@@ -98,13 +179,16 @@ namespace DemoUserManagement.DAL
             return InsertedUser;
         }
 
+
+
+
         public static List<UserModel> GetAllUsers()
         {
             List<UserModel> userList = new List<UserModel>();
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     userList = context.UserDetails
                         .Select(userModel => new UserModel
@@ -151,7 +235,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     // Retrieve all address details and project them to AddressDetailsModel
                     ListOfAddresses = context.AddressDetails
@@ -179,7 +263,7 @@ namespace DemoUserManagement.DAL
             UserModel users = null;
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
 
                     var userDetailEntity = context.UserDetails.FirstOrDefault(u => u.UserID == UserId);
@@ -230,7 +314,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     // Retrieve addresses based on UserId and project them to AddressDetailsModel
                     listOfAddresses = context.AddressDetails
@@ -261,7 +345,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                    
                     var existingUser = context.UserDetails.FirstOrDefault(u => u.UserID == IdToUpdate);
@@ -295,7 +379,7 @@ namespace DemoUserManagement.DAL
                     var presentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Present);
                     var permanentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Permanent);
 
-                   
+                    // Update addresses 
                     presentAddress.Address = ListofAddresses[0].Address;
                     permanentAddress.Address = ListofAddresses[1].Address;
 
@@ -321,7 +405,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     Note newNote = new Note
                     {
@@ -333,12 +417,13 @@ namespace DemoUserManagement.DAL
                     };
 
 
+                    // Add the new note to the context
                     context.Notes.Add(newNote);
 
-                  
+                    // Save changes to the database
                     context.SaveChanges();
                     flag = true;
-                 
+                    // Refresh the displayed notes
 
                 }
             }
@@ -355,7 +440,7 @@ namespace DemoUserManagement.DAL
             List<NoteModel> ListofNotes = new List<NoteModel>();
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
 
                     var userNotes = context.Notes
@@ -385,7 +470,7 @@ namespace DemoUserManagement.DAL
         {
             List<NoteModel> notes = new List<NoteModel>();
 
-            using (var context = new FORMEntities())
+            using (var context = new FORMEntities1())
             {
                 notes = context.Notes
                     .Where(n => n.ObjectID == objectId)
@@ -410,14 +495,14 @@ namespace DemoUserManagement.DAL
             List<string> countriesList = new List<string>();
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
-                   
+                    // Retrieve all countries from the Country table
                     var countries = context.Countries
                         .Select(c => c.CountryName)
                         .ToList();
 
-                   
+                    // Now, 'countries' contains a list of all country names
                     countriesList.AddRange(countries);
                 }
             }
@@ -434,9 +519,9 @@ namespace DemoUserManagement.DAL
             List<string> statesList = new List<string>();
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
-               
+                    // Retrieve the states for the selected country from the State table
                     statesList = context.States
                         .Where(s => s.Country.CountryName == CountryName)
                         .Select(s => s.StateName)
@@ -460,7 +545,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     var country = context.Countries.FirstOrDefault(c => c.CountryName == CountryName);
                     var state = context.States.FirstOrDefault(s => s.StateName == StateName);
@@ -482,17 +567,17 @@ namespace DemoUserManagement.DAL
         public static List<UserModel> GetSortedAndPagedUsers(string sortExpression, string sortDirection, int pageIndex, int pageSize)
         {
             List<UserModel> UsersList = new List<UserModel>();
-            using (var context = new FORMEntities())
+            using (var context = new FORMEntities1())
             {
                 IQueryable<UserDetail> query = context.UserDetails;
 
-                
+                // Apply dynamic sorting
                 query = ApplySorting(query, sortExpression, sortDirection);
 
-               
-                List<UserDetail> users = query.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                // Apply paging
+                List<UserDetail> users = query.Skip(pageIndex).Take(pageSize).ToList();
 
-               
+                // Map the result to UserDetailsModel and return the result
                 UsersList = users.Select(userModel => new UserModel
                 {
                     UserID = userModel.UserID,
@@ -537,10 +622,7 @@ namespace DemoUserManagement.DAL
                 case "FirstName":
                     query = (sortDirection == "ASC") ? query.OrderBy(u => u.FirstName) : query.OrderByDescending(u => u.FirstName);
                     break;
-                case "LastName":
-                    query = (sortDirection == "ASC") ? query.OrderBy(u => u.LastName) : query.OrderByDescending(u => u.LastName);
-                    break;
-                    
+                   
             }
 
             return query;
@@ -551,7 +633,7 @@ namespace DemoUserManagement.DAL
             int length = 0;
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     length = context.UserDetails.ToList().Count;
 
@@ -570,7 +652,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     var country = context.Countries.FirstOrDefault(c => c.CountryID == countryID);
                     var state = context.States.FirstOrDefault(s => s.StateID == stateID);
@@ -593,7 +675,7 @@ namespace DemoUserManagement.DAL
             bool flag = false;
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
 
                     Document TempDocument = new Document
@@ -606,7 +688,7 @@ namespace DemoUserManagement.DAL
                         TimeStamp = DateTime.Now.ToString(),
                     };
 
-                  
+                    // Add the document to the context and save changes
                     context.Documents.Add(TempDocument);
                     context.SaveChanges();
                     flag = true;
@@ -624,7 +706,7 @@ namespace DemoUserManagement.DAL
         {
             List<DocumentModel> documents = new List<DocumentModel>();
 
-            using (var context = new FORMEntities())
+            using (var context = new FORMEntities1())
             {
                 documents = context.Documents
                     .Where(n => n.ObjectID == objectId)
@@ -652,7 +734,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities())
+                using (var context = new FORMEntities1())
                 {
                     totalDoc = context.Documents.Count(n => n.ObjectID == objectId); ;
                 }
@@ -667,7 +749,7 @@ namespace DemoUserManagement.DAL
 
         public static void AddDocuments(DocumentModel document)
         {
-            using (var context = new FORMEntities())
+            using (var context = new FORMEntities1())
             {
                 Document doc = new Document
                 {
@@ -689,7 +771,7 @@ namespace DemoUserManagement.DAL
             List<Document> docTypeList = new List<Document>();
             try
             {
-                using (FORMEntities context = new FORMEntities())
+                using (FORMEntities1 context = new FORMEntities1())
                 {
                     docTypeList=context.Documents.ToList();
                 }
@@ -700,6 +782,64 @@ namespace DemoUserManagement.DAL
             }
             return docTypeList;
         }
+        public void AddNote(NoteModel note)
+        {
+            using (var context = new FORMEntities1())
+            {
+                Note noteEntity = new Note
+                {
+                    ObjectID = note.ObjectID,
+                    NoteText = note.NoteText,
+                    ObjectType = note.ObjectType,
+                    CreatedDate = DateTime.Now.ToString()
+                };
+
+                context.Notes.Add(noteEntity);
+                context.SaveChanges();
+            }
+        }
+
+        public int GetTotalNotes(int objectId)
+        {
+            int Length = 0;
+            try
+            {
+                using (var Context = new FORMEntities1())
+                {
+                    Length = Context.Notes.ToList().Count;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+            return Length;
+        }
+
+        public static bool EmailExists(string email)
+        {
+
+            using (var context = new FORMEntities1())
+            {
+                return context.UserDetails.Any(u => u.Email == email);
+            }
+        }
+
+        public static bool UserEmail(string userId, string email)
+        {
+            bool emailExists = false;
+            using (var context = new FORMEntities1())
+            {
+                if (int.TryParse(userId, out int userIdInt))
+                {
+                    emailExists = context.UserDetails.Any(u => u.UserID == userIdInt && u.Email == email);
+                }
+            }
+            return emailExists;
+        }
+
+
 
 
     }

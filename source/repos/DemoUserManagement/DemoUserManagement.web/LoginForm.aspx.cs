@@ -7,31 +7,44 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DemoUserManagement.Web;
 
 namespace DemoUserManagement
 {
-    public partial class LoginForm : System.Web.UI.Page
+    public partial class LoginForm : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        protected void btnLogin_Click(object sender, EventArgs e)
+        protected void BtnLogin_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text;
             string password = txtPassword.Text;
 
-            List<UserModel> users = BusinessLayer.GetAllUsers();
-            UserModel user = users.FirstOrDefault(u => u.Email == email && u.Password == password);
-            if (user != null) {
-                lblMessage.Visible = false; // Hide error message
-                Response.Redirect("Users.aspx");
+            int UserID=BusinessLayer.IsUser(email, password);
+            if (UserID > 0) {
+                lblMessage.Visible = false;
+                if (BusinessLayer.IsAdmin(UserID))
+                {
+                    Response.Redirect("Users.aspx");
+                }
+                else
+                {
+                    Response.Redirect("UserDetails.aspx");
+                }
+               
             }
             else
             {
                 lblMessage.Visible = true;
                 lblMessage.Text = "Invalid email or password.";
             }
+        }
+        protected void BtnSignup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserDetails.aspx");
+           
         }
     }
 }

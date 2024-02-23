@@ -45,6 +45,15 @@
           <Property Name="ObjectID" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar(max)" />
+          <Property Name="IsDefault" Type="int" Nullable="false" />
+          <Property Name="IsAdmin" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateID" />
@@ -82,6 +91,14 @@
           <Property Name="Percentage12th" Type="int" />
           <Property Name="InstitueBTECH" Type="nvarchar(max)" />
           <Property Name="PercentageBTECH" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__AddressDe__Count__47DBAE45">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
@@ -131,13 +148,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UserRole__RoleID__52593CB8">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRole__UserID__534D60F1">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FORMModelStoreContainer">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AddressDe__Count__47DBAE45" Association="Self.FK__AddressDe__Count__47DBAE45">
             <End Role="Country" EntitySet="Country" />
             <End Role="AddressDetails" EntitySet="AddressDetails" />
@@ -153,6 +196,14 @@
           <AssociationSet Name="FK__State__CountryID__398D8EEE" Association="Self.FK__State__CountryID__398D8EEE">
             <End Role="Country" EntitySet="Country" />
             <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRole__RoleID__52593CB8" Association="Self.FK__UserRole__RoleID__52593CB8">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRole__UserID__534D60F1" Association="Self.FK__UserRole__UserID__534D60F1">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -205,6 +256,16 @@
           <Property Name="ObjectID" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="Int32" Nullable="false" />
+          <Property Name="IsAdmin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__RoleID__52593CB8" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateID" />
@@ -245,6 +306,17 @@
           <Property Name="InstitueBTECH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PercentageBTECH" Type="Int32" />
           <NavigationProperty Name="AddressDetails" Relationship="Self.FK__AddressDe__UserI__46E78A0C" FromRole="UserDetails" ToRole="AddressDetails" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__UserID__534D60F1" FromRole="UserDetails" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__UserRole__RoleID__52593CB8" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK__UserRole__UserID__534D60F1" FromRole="UserRole" ToRole="UserDetails" />
         </EntityType>
         <Association Name="FK__AddressDe__Count__47DBAE45">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
@@ -294,13 +366,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FORMEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__UserRole__RoleID__52593CB8">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRole__UserID__534D60F1">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FORMEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetail" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Documents" EntityType="Self.Document" />
           <EntitySet Name="Notes" EntityType="Self.Note" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="States" EntityType="Self.State" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <AssociationSet Name="FK__AddressDe__Count__47DBAE45" Association="Self.FK__AddressDe__Count__47DBAE45">
             <End Role="Country" EntitySet="Countries" />
             <End Role="AddressDetails" EntitySet="AddressDetails" />
@@ -317,13 +415,21 @@
             <End Role="Country" EntitySet="Countries" />
             <End Role="State" EntitySet="States" />
           </AssociationSet>
+          <AssociationSet Name="FK__UserRole__RoleID__52593CB8" Association="Self.FK__UserRole__RoleID__52593CB8">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRole__UserID__534D60F1" Association="Self.FK__UserRole__UserID__534D60F1">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FORMModelStoreContainer" CdmEntityContainer="FORMEntities">
+        <EntityContainerMapping StorageEntityContainer="FORMModelStoreContainer" CdmEntityContainer="FORMEntities1">
           <EntitySetMapping Name="AddressDetails">
             <EntityTypeMapping TypeName="FORMModel.AddressDetail">
               <MappingFragment StoreEntitySet="AddressDetails">
@@ -368,6 +474,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FORMModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="FORMModel.State">
               <MappingFragment StoreEntitySet="State">
@@ -405,6 +521,15 @@
                 <ScalarProperty Name="Percentage12th" ColumnName="Percentage12th" />
                 <ScalarProperty Name="InstitueBTECH" ColumnName="InstitueBTECH" />
                 <ScalarProperty Name="PercentageBTECH" ColumnName="PercentageBTECH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="FORMModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

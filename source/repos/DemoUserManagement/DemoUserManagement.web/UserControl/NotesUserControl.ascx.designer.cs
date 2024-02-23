@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DemoUserManagement.Web.User_Control
+namespace DemoUserManagement.UserControl
 {
 
 
-    public partial class NoteUserControl
+    public partial class NotesUserControl
     {
 
         /// <summary>
@@ -31,6 +31,15 @@ namespace DemoUserManagement.Web.User_Control
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnAddNotes;
+
+        /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
 
         /// <summary>
         /// NotesGrid control.

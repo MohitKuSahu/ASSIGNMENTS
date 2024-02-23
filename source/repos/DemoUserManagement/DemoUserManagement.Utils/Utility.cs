@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoUserManagement.Models;
+using System.Web;
 
 namespace DemoUserManagement.Utils
 {
@@ -22,6 +24,20 @@ namespace DemoUserManagement.Utils
         { 
             Photo = 1,
             Others = 2
+        }
+
+        public static class SessionManager
+        {
+            public static SessionModel GetSessionModel()
+            {
+                SessionModel sessionModel = HttpContext.Current.Session["SessionModel"] as SessionModel;
+                return sessionModel ?? new SessionModel();
+            }
+
+            public static void SetSessionModel(SessionModel sessionModel)
+            {
+                HttpContext.Current.Session["SessionModel"] = sessionModel;
+            }
         }
     }
 }

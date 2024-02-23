@@ -4,17 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a3543c83a66047069bdbe33a4504643e" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="FORMModel.AddressDetail" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+      <Diagram DiagramId="83dcb886cf4943dd9196b37f86a9d479" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="FORMModel.AddressDetail" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FORMModel.Country" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FORMModel.Document" Width="1.5" PointX="5.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FORMModel.Note" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FORMModel.State" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FORMModel.Document" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="FORMModel.Note" Width="1.5" PointX="7.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FORMModel.Role" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FORMModel.State" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FORMModel.UserDetail" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FORMModel.UserRole" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="FORMModel.FK__AddressDe__Count__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="FORMModel.FK__AddressDe__State__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="FORMModel.FK__AddressDe__UserI__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="FORMModel.FK__State__CountryID__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="FORMModel.FK__UserRole__RoleID__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="FORMModel.FK__UserRole__UserID__534D60F1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
