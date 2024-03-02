@@ -34,6 +34,10 @@ namespace DemoUserManagement.Models
         public string InstituteBTECH { get; set; }
         public int PercentageBTECH { get; set; }
 
+        public string FileName { get; set; }
+
+        public string Profile { get; set; }
+
 
     }
 }

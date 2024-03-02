@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDetails</title>
+</head>
+<body>
+
+
+
+    <form  id="registrationForm" class="needs-validation" novalidate>
+        <center>
+            <h3>REGISTRATION FORM</h3>
+        </center>
+
+        <div class="container1 ">
+            <h3>PERSONAL DETAILS</h3>
+            <div class="row mb-5">
+
+                <div class="col-md-4 position-relative">
+                    <label for="firstName">FIRST NAME:</label>
+                    <input type="text" class="form-control" id="firstName" name="FIRSTNAME" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="middleName">MIDDLE NAME:</label>
+                    <input type="text" class="form-control" id="middleName" name="MIDDLENAME">
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="lastName">LAST NAME:</label>
+                    <input type="text" class="form-control" id="lastName" name="LASTNAME" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="fatherName ">FATHER'S NAME:</label>
+                    <input type="text" class="form-control" id="fatherName" name="FATHERNAME" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="motherName">MOTHER'S NAME:</label>
+                    <input type="text" class="form-control" id="motherName" name="MOTHERNAME" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <label for="gname">GUARDIAN'S NAME(if any):</label>
+                    <input type="text" class="form-control" id="gname" name="GUARDIANNAME">
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="DateofBirth">DATE OF BIRTH:</label>
+                    <input type="date" class="form-control" id="DateofBirth" min="2000-01-01" name="Date of Birth"
+                           required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="bloodGroupInput" aria-label="select example">BLOOD GROUP:</label>
+                    <input type="text" id="bloodGroupInput" list="bloodGroups" class="form-control"
+                           placeholder="Select Here" name="BLOOD GROUP" required>
+                    <datalist id="bloodGroups">
+                        <option value="" label="Select Here">
+                        <option value="O+">
+                        <option value="O-">
+                        <option value="A+">
+                        <option value="A-">
+                        <option value="B+">
+                        <option value="B-">
+                        <option value="AB+">
+                        <option value="AB-">
+                    </datalist>
+
+                    <div class="invalid-tooltip">
+                        Please select a valid Blood group.
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <label for="GENDER">GENDER:</label>
+                    <div class="d-flex">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="male" name="GENDER" value="MALE" required>
+                            <label class="form-check-label" for="male">MALE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" id="female" name="GENDER" value="FEMALE"
+                                   required>
+                            <label class="form-check-label" for="female">FEMALE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="others" name="GENDER" value="OTHERS"
+                                   required>
+                            <label class="form-check-label" for="others">OTHER</label>&nbsp;&nbsp;
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <label for="STATUS">STATUS:</label>
+                    <div class="d-flex ">
+                        <div class="form-check ">
+                            <input type="radio" class="form-check-input" id="single" name="STATUS" value="SINGLE"
+                                   required>
+                            <label class="form-check-label" for="male">SINGLE</label>&nbsp;&nbsp;
+
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="married" name="STATUS" value="MARRIED"
+                                   required>
+                            <label class="form-check-label" for="female">MARRIED</label>&nbsp;&nbsp;
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="WORK">WORKEXPERIENCE:</label>
+                    <div class="d-flex ">
+                        <div class="form-check ">
+                            <input type="radio" class="form-check-input" id="0 yrs" name="WORKEXPERIENCE" value="0 yrs"
+                                   required>
+                            <label class="form-check-label" for="0 yrs">0 yrs</label>&nbsp;&nbsp;
+
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="0-5 yrs" name="WORKEXPERIENCE"
+                                   value="0-5 yrs" required>
+                            <label class="form-check-label" for="0-5 yrs">0-5 yrs</label>&nbsp;&nbsp;
+
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="6-10 yrs" name="WORKEXPERIENCE"
+                                   value="6-10 yrs" required>
+                            <label class="form-check-label" for="6-10 yrs">6-10 yrs</label>&nbsp;&nbsp;
+
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="10+ yrs" name="WORKEXPERIENCE"
+                                   value="10+ yrs" required>
+                            <label class="form-check-label" for="10+ yrs">10+ yrs</label>&nbsp;&nbsp;
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="documentsInput" aria-label="select example">DOCUMENTS VERIFY:</label>
+                    <input type="text" id="documentsInput" list="documentTypes" class="form-control"
+                           placeholder="Select Here" required>
+                    <datalist id="documentTypes">
+                        <option value="AADHAR CARD">
+                        <option value="PAN CARD">
+                        <option value="VOTER ID CARD">
+                    </datalist>
+                    <div class="invalid-tooltip">
+                        Please select your Documents
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="docUpload">DOC UPLOAD:</label>
+                    <input type="file" class="form-control" id="docUpload" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="PHOTO">UPLOAD PHOTO:</label>
+                    <input type="file" class="form-control" id="PHOTO" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container2">
+            <h3>ACADEMIC DETAILS</h3>
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <label for="Board10">CLASS 10th BOARD:</label>
+                    <div class="d-flex">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="CBSE" name="Board10" value="CBSE" required>
+                            <label class="form-check-label" for="CBSE">CBSE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" id="ICSE" name="Board10" value="ICSE" required>
+                            <label class="form-check-label" for="ICSE">ICSE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="OTHER BOARD" name="Board10" value="OTHERS"
+                                   required>
+                            <label class="form-check-label" for="OTHER BOARD">OTHER </label>
+                            &nbsp;&nbsp;
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <label for="Board12">CLASS 12th BOARD:</label>
+                    <div class="d-flex ">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="CBS" name="Board12" value="CBSE" required>
+                            <label class="form-check-label" for="CBS">CBSE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" id="ICS" name="Board12" value="ICSE" required>
+                            <label class="form-check-label" for="ICS">ICSE</label>&nbsp;&nbsp;
+
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="OTHER BOAR" name="Board12" value="OTHERS"
+                                   required>
+                            <label class="form-check-label" for="OTHER BOAR">OTHER </label>
+                            &nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="institutename10">Class 10th Institute Name:</label>
+                    <input type="text" class="form-control" id="institutename10" name="Class 10th Institute Name"
+                           required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="institutename12">Class 12th Institute Name:</label>
+                    <input type="text" class="form-control" id="institutename12" name="Class 12th Institute Name"
+                           required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="institutenameB.Tech">B.Tech Institute Name:</label>
+                    <input type="text" class="form-control" id="institutenameB.Tech" name="B.Tech Institute Name"
+                           required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="percent10">Class 10th Percentage:</label>
+                    <input type="number" class="form-control" id="percent10" name="Class 10th Percentage" required>
+                    <div class="invalid-tooltip">
+                        Please fill up properly
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="percent12">Class 12th Percentage:</label>
+                    <input type="number" class="form-control" id="percent12" name="Class 10th Percentage" required>
+                    <div class="invalid-tooltip">
+                        Please fill up properly
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="percentB.Tech">B.Tech CGPA:</label>
+                    <input type="number" class="form-control" id="percentB.Tech" name="B.Tech CGPA" required>
+                    <div class="invalid-tooltip">
+                        Please fill up properly
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="container3">
+            <h3>LOCATION</h3>
+            <h4>PRESENT ADDRESS:</h4>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPresentCountry" class="form-label star-mark required">Country</label>
+                    <div class="input-group">
+                        <select class="form-select" name="country" id="ddlPresentCountry"
+                                data-bs-toggle="tooltip" data-required="required" title="Select your country"
+                                data-label="Country">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPresentState" class="form-label star-mark required">State</label>
+                    <div class="input-group">
+                        <select class="form-select" name="state" id="ddlPresentState"
+                                data-bs-toggle="tooltip" data-required="required" title="Select your state"
+                                data-label="State">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="cityInput" class="form-label">CITY:</label>
+                    <input type="text" id="cityInput" list="cities_" class="form-control" placeholder="Select Here"
+                           name="PRESENT CITY" required>
+                    <datalist id="cities_">
+                        <option value="" label="Select Here">
+                        <option value="NEW DELHI">
+                        <option value="ISLAMABAD">
+                        <option value="SHINJUKU">
+                        <option value="SHIBUYA">
+                        <option value="OTHERS">
+                    </datalist>
+
+                    <div class="invalid-tooltip">
+                        Please select a valid city.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="address1">ADDRESS LINE 1:</label>
+                    <input type="text" class="form-control" id="address1" name="PRESENT ADDRESS LINE 1" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="address2">ADDRESS LINE 2:</label>
+                    <input type="text" class="form-control" id="address2" name="PRESENT ADDRESS LINE 2" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="PINCODE">PINCODE</label>
+                    <input type="number" class="form-control" id="PINCODE" name="PRESENT PINCODE" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 35px;">
+                <input type="checkbox" class="form-check-input" id="copyAddressCheckbox">
+                <label class="form-check-label" for="copyAddressCheckbox">Same as Present Address</label>
+            </div>
+
+            <h4>PERMANENT ADDRESS:</h4>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPermanentCountry" class="form-label star-mark required">Country</label>
+                    <div class="input-group">
+                        <select class="form-select" name="country" id="ddlPermanentCountry"
+                                data-bs-toggle="tooltip" data-required="required" title="Select your country"
+                                data-label="Country">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPermanentState" class="form-label star-mark required">State</label>
+                    <div class="input-group">
+                        <select class="form-select" name="country" id="ddlPermanentState"
+                                data-bs-toggle="tooltip" data-required="required" title="Select your state"
+                                data-label="State">
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="cityInput1" class="form-label">CITY:</label>
+                    <input type="text" id="cityInput1" list="cities" class="form-control" placeholder="Select Here"
+                           name="PERMANENT CITY" required>
+                    <datalist id="cities">
+                        <option value="" label="Select Here">
+                        <option value="NEW DELHI">
+                        <option value="ISLAMABAD">
+                        <option value="SHINJUKU">
+                        <option value="SHIBUYA">
+                        <option value="OTHERS">
+                    </datalist>
+
+                    <div class="invalid-tooltip">
+                        Please select a valid city.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="address1_">ADDRESS LINE 1:</label>
+                    <input type="text" class="form-control" id="address1_" name="PERMANENT ADDRESS LINE 1" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="address2_">ADDRESS LINE 2:</label>
+                    <input type="text" class="form-control" id="address2_" name="PERMANENT ADDRESS LINE 2" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="PINCODE_">PINCODE</label>
+                    <input type="number" class="form-control" id="PINCODE_" name="PERMANENT PINCODE" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="container4">
+            <h3>CONTACTS</h3>
+            <div class="row mb-5">
+                <div class="col-md-6 position-relative">
+                    <label for="phn">MOBILE NUMBER:</label>
+                    <input type="tel" class="form-control" id="phn" name="MOBILE NUMBER"
+                           required>
+                    <div class="invalid-tooltip">
+                        mobile no should be of 10 digits
+                    </div>
+                </div>
+
+                <div class="col-md-6 ">
+                    <label for="altn">ALTERNATE NUMBER:</label>
+                    <input type="tel" class="form-control" id="altn" name="ALTERNATE NUMBER">
+                    <div class="invalid-tooltip">
+                        Please choose a valid mobile no
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-6 position-relative">
+                    <label for="email">EMAIL:</label>
+                    <input type="email" class="form-control" id="email" name="EMAIL" required>
+                    <div id="lblEmailError" class="error"></div>
+                </div>
+
+                <div class="col-md-6 position-relative">
+                    <label for="password">PASSWORD</label>
+                    <input type="text" class="form-control" id="password" name="PASSWORD" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container5">
+
+
+
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success" id="btnSubmit" onclick="SubmitFormData()">SUBMIT</button>
+                <button type="button" class="btn btn-danger" id="btnUpdate">Update</button>
+            </div>
+        </div>
+
+
+    </form>
+
+    </body>
+    </html>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/Script.js"></script>
+
+
+

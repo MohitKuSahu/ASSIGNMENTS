@@ -18,23 +18,7 @@ namespace DemoUserManagement
 
             if (!IsPostBack)
             {
-                UsersNavItem.Visible = false;
-                LogoutLink.Visible = false;
-                string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath);
-                HtmlAnchor li = (HtmlAnchor)FindControl(pageName + "Link");
-                if (li != null)
-                {
-                    li.Attributes.Add("class", "active");
-                }
-                SessionModel session = SessionManager.GetSessionModel();
-                if (session.UserId != 0)
-                {
-                    LogoutLink.Visible = true;
-                    if (session.IsAdmin)
-                    {
-                        UsersNavItem.Visible = true;
-                    }
-                }
+                
             }
         }
 

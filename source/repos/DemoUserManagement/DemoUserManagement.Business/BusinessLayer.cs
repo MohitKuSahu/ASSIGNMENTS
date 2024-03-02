@@ -32,6 +32,15 @@ namespace DemoUserManagement.Business
         {
             return DAL.DAL.GetAddresses(UserId);
         }
+        public static List<CountryModel> GetCountry(int CountryId)
+        {
+            return DAL.DAL.GetCountry(CountryId);
+        }
+
+        public static List<StateModel> GetState(int StateId)
+        {
+            return DAL.DAL.GetState(StateId);
+        }
 
         public static int IsUser(string email, string password)
         {
@@ -40,11 +49,11 @@ namespace DemoUserManagement.Business
 
         public static bool IsAdmin(int userId)
         {
-            return DAL.DAL.IsAdmin(userId); 
+            return DAL.DAL.IsAdmin(userId);
         }
 
 
-            public static bool UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
+        public static bool UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
         {
             return DAL.DAL.UpdateUser(UserInfo, ListofAddresses, IdToUpdate);
 
@@ -59,7 +68,10 @@ namespace DemoUserManagement.Business
             return DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId);
         }
 
-
+        public static Tuple<int, int> GetCountryAndStateId(string CountryName, string StateName)
+        {
+            return DAL.DAL.GetCountryAndStateId(CountryName, StateName);
+        }
 
         public void AddNote(NoteModel note)
         {
@@ -70,6 +82,15 @@ namespace DemoUserManagement.Business
         public static List<UserModel> GetAllUsers()
         {
             return DAL.DAL.GetAllUsers();
+        }
+
+        public static List<NoteModel> GetUserNotes()
+        {
+            return DAL.DAL.GetUserNotes();
+        }
+        public static List<DocumentModel> GetUserDocuments()
+        {
+            return DAL.DAL.GetUserDocuments();
         }
 
         public static List<string> GetAllCountries()
@@ -106,6 +127,7 @@ namespace DemoUserManagement.Business
         {
             return DAL.DAL.TotalUsers();
         }
+
 
 
 
@@ -160,6 +182,7 @@ namespace DemoUserManagement.Business
         {
             return DAL.DAL.UserEmail(userId, email);
         }
+
     }
 }
 

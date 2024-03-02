@@ -3,6 +3,7 @@ using DemoUserManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace DemoUserManagement.DAL
             int userId = 0;
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     if ((email != "") && password != "")
                     {
@@ -46,10 +47,11 @@ namespace DemoUserManagement.DAL
         {
             UserModel user = null;
 
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 user = context.UserDetails.Where(u => u.UserID == userId).Select(u => new UserModel
                 {
+                    UserID = u.UserID,  
                     FirstName = u.FirstName,
                     MiddleName = u.MiddleName,
                     LastName = u.LastName,
@@ -74,6 +76,8 @@ namespace DemoUserManagement.DAL
                     Percentage12th =(int) u.Percentage12th,
                     PercentageBTECH = (int)u.PercentageBTECH,
                     Documents = u.Documents,
+                    FileName=u.FileName,
+                    Profile=u.Profile
                 })
                     .FirstOrDefault();
             }
@@ -83,7 +87,7 @@ namespace DemoUserManagement.DAL
 
         public static bool IsAdmin(int userId)
         {
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 var isAdmin = (from ur in context.UserRoles
                                join r in context.Roles on ur.RoleID equals r.RoleID
@@ -102,7 +106,7 @@ namespace DemoUserManagement.DAL
 
             InsertedUser["flag"] = 0; // flag - 0 
 
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
 
                     var newUser = new UserDetail
@@ -131,6 +135,8 @@ namespace DemoUserManagement.DAL
                         Percentage12th = userModel.Percentage12th,
                         PercentageBTECH = userModel.PercentageBTECH,
                         Documents = userModel.Documents,
+                        FileName = userModel.FileName,
+                        Profile = userModel.Profile
                     };
 
                     // pass it to context API 
@@ -188,11 +194,12 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     userList = context.UserDetails
                         .Select(userModel => new UserModel
                         {
+                            UserID = userModel.UserID,  
                             FirstName = userModel.FirstName,
                             MiddleName = userModel.MiddleName,
                             LastName = userModel.LastName,
@@ -217,6 +224,8 @@ namespace DemoUserManagement.DAL
                             Percentage12th = (int)userModel.Percentage12th,
                             PercentageBTECH = (int)userModel.PercentageBTECH,
                             Documents = userModel.Documents,
+                            FileName = userModel.FileName,
+                            Profile = userModel.Profile
                         })
                         .ToList();
                 }
@@ -235,7 +244,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     // Retrieve all address details and project them to AddressDetailsModel
                     ListOfAddresses = context.AddressDetails
@@ -263,7 +272,7 @@ namespace DemoUserManagement.DAL
             UserModel users = null;
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
 
                     var userDetailEntity = context.UserDetails.FirstOrDefault(u => u.UserID == UserId);
@@ -295,6 +304,8 @@ namespace DemoUserManagement.DAL
                         Percentage12th = (int)userDetailEntity.Percentage12th,
                         PercentageBTECH = (int)userDetailEntity.PercentageBTECH,
                         Documents = userDetailEntity.Documents,
+                        FileName = userDetailEntity.FileName,
+                        Profile = userDetailEntity.Profile
                     };
 
                 }
@@ -314,9 +325,9 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
-                    // Retrieve addresses based on UserId and project them to AddressDetailsModel
+                 
                     listOfAddresses = context.AddressDetails
                         .Where(a => a.UserID == userId)
                         .Select(addressDetailEntity => new AddressModel
@@ -337,6 +348,59 @@ namespace DemoUserManagement.DAL
 
             return listOfAddresses;
         }
+        public static List<CountryModel> GetCountry(int CountryId)
+        {
+            List<CountryModel> listOfCountries = new List<CountryModel>();
+
+            try
+            {
+                using (var context = new FORMEntities())
+                {
+
+                    listOfCountries = context.Countries
+                        .Where(a => a.CountryID == CountryId)
+                        .Select(CountryDetailEntity => new CountryModel
+                        {
+                            CountryID = CountryDetailEntity.CountryID,
+                            CountryName=CountryDetailEntity.CountryName,
+                        })
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+
+            return listOfCountries;
+        }
+
+        public static List<StateModel> GetState(int StateId)
+        {
+            List<StateModel> listOfStates = new List<StateModel>();
+
+            try
+            {
+                using (var context = new FORMEntities())
+                {
+
+                    listOfStates = context.States
+                        .Where(a => a.StateID == StateId)
+                        .Select(StateDetaiEntity => new StateModel
+                        {
+                            StateID = StateDetaiEntity.StateID, 
+                            StateName=StateDetaiEntity.StateName,
+                        })
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+
+            return listOfStates;
+        }
 
         public static  bool UpdateUser(UserModel UserInfo, List<AddressModel> ListofAddresses, int IdToUpdate)
         {
@@ -345,7 +409,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                    
                     var existingUser = context.UserDetails.FirstOrDefault(u => u.UserID == IdToUpdate);
@@ -375,6 +439,8 @@ namespace DemoUserManagement.DAL
                     existingUser.Percentage12th = UserInfo.Percentage12th;
                     existingUser.PercentageBTECH = UserInfo.PercentageBTECH;
                     existingUser.Documents = UserInfo.Documents;
+                    existingUser.FileName=UserInfo.FileName;
+                    existingUser.Profile=UserInfo.Profile;
 
                     var presentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Present);
                     var permanentAddress = context.AddressDetails.FirstOrDefault(a => a.UserID == IdToUpdate && a.Type == (int)Utility.AddressType.Permanent);
@@ -405,7 +471,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     Note newNote = new Note
                     {
@@ -413,17 +479,17 @@ namespace DemoUserManagement.DAL
                         NoteText = InputNoteText,
                         ObjectID = UserId,
                         ObjectType = ObjectType,
-                        CreatedDate = DateTime.Now.ToString("yyyy-MM-dd")
+                        CreatedDate = DateTime.Now.ToString()
                     };
 
 
-                    // Add the new note to the context
+                  
                     context.Notes.Add(newNote);
 
-                    // Save changes to the database
+                 
                     context.SaveChanges();
                     flag = true;
-                    // Refresh the displayed notes
+                  
 
                 }
             }
@@ -440,7 +506,7 @@ namespace DemoUserManagement.DAL
             List<NoteModel> ListofNotes = new List<NoteModel>();
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
 
                     var userNotes = context.Notes
@@ -470,7 +536,7 @@ namespace DemoUserManagement.DAL
         {
             List<NoteModel> notes = new List<NoteModel>();
 
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 notes = context.Notes
                     .Where(n => n.ObjectID == objectId)
@@ -489,20 +555,59 @@ namespace DemoUserManagement.DAL
             }
             return notes;
         }
-       
+
+        public static List<NoteModel> GetUserNotes()
+        {
+            List<NoteModel> notes = new List<NoteModel>();
+
+            using (var context = new FORMEntities())
+            {
+                notes = context.Notes
+                    .Select(n => new NoteModel
+                    {
+                        NoteID = (int)n.NoteID,
+                        NoteText = n.NoteText,
+                        ObjectID = n.ObjectID,
+                        ObjectType = (int)n.ObjectType,
+                        CreatedDate = n.CreatedDate.ToString()
+                    })
+                    .ToList();
+            }
+            return notes;
+        }
+        public static List<DocumentModel> GetUserDocuments()
+        {
+            List<DocumentModel> documents = new List<DocumentModel>();
+
+            using (var context = new FORMEntities())
+            {
+                documents = context.Documents
+                    .Select(n => new DocumentModel
+                    {
+                        DocumentID = n.DocumentID,
+                        ObjectID = n.ObjectID,
+                        ObjectType = n.ObjectType,
+                        DocumentType = n.DocumentType,
+                        DocumentGuidName = n.DocumentGuidName,
+                        DocumentOriginalName = n.DocumentOriginalName,
+                        TimeStamp = n.TimeStamp.ToString(),
+                    })
+                    .ToList();
+            }
+            return documents;
+        }
         public static List<string> GetAllCountries()
         {
             List<string> countriesList = new List<string>();
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
-                    // Retrieve all countries from the Country table
+                 
                     var countries = context.Countries
                         .Select(c => c.CountryName)
                         .ToList();
 
-                    // Now, 'countries' contains a list of all country names
                     countriesList.AddRange(countries);
                 }
             }
@@ -519,7 +624,7 @@ namespace DemoUserManagement.DAL
             List<string> statesList = new List<string>();
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     // Retrieve the states for the selected country from the State table
                     statesList = context.States
@@ -545,7 +650,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     var country = context.Countries.FirstOrDefault(c => c.CountryName == CountryName);
                     var state = context.States.FirstOrDefault(s => s.StateName == StateName);
@@ -564,10 +669,32 @@ namespace DemoUserManagement.DAL
 
         }
 
+        public static Tuple<int,int> GetCountryAndStateId(string CountryName, string StateName)
+        {
+            
+            try
+            {
+                using (var context = new FORMEntities())
+                {
+                    var country = context.Countries.FirstOrDefault(c => c.CountryName == CountryName);
+                    var state = context.States.FirstOrDefault(s => s.StateName == StateName);
+                    Tuple<int,int> list=new Tuple<int,int>(country.CountryID,state.StateID);
+                    return list;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+            return null;
+        }
+
+
         public static List<UserModel> GetSortedAndPagedUsers(string sortExpression, string sortDirection, int pageIndex, int pageSize)
         {
             List<UserModel> UsersList = new List<UserModel>();
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 IQueryable<UserDetail> query = context.UserDetails;
 
@@ -633,7 +760,7 @@ namespace DemoUserManagement.DAL
             int length = 0;
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     length = context.UserDetails.ToList().Count;
 
@@ -652,7 +779,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     var country = context.Countries.FirstOrDefault(c => c.CountryID == countryID);
                     var state = context.States.FirstOrDefault(s => s.StateID == stateID);
@@ -675,7 +802,7 @@ namespace DemoUserManagement.DAL
             bool flag = false;
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
 
                     Document TempDocument = new Document
@@ -706,7 +833,7 @@ namespace DemoUserManagement.DAL
         {
             List<DocumentModel> documents = new List<DocumentModel>();
 
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 documents = context.Documents
                     .Where(n => n.ObjectID == objectId)
@@ -734,7 +861,7 @@ namespace DemoUserManagement.DAL
 
             try
             {
-                using (var context = new FORMEntities1())
+                using (var context = new FORMEntities())
                 {
                     totalDoc = context.Documents.Count(n => n.ObjectID == objectId); ;
                 }
@@ -749,7 +876,7 @@ namespace DemoUserManagement.DAL
 
         public static void AddDocuments(DocumentModel document)
         {
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 Document doc = new Document
                 {
@@ -771,7 +898,7 @@ namespace DemoUserManagement.DAL
             List<Document> docTypeList = new List<Document>();
             try
             {
-                using (FORMEntities1 context = new FORMEntities1())
+                using (FORMEntities context = new FORMEntities())
                 {
                     docTypeList=context.Documents.ToList();
                 }
@@ -784,7 +911,7 @@ namespace DemoUserManagement.DAL
         }
         public void AddNote(NoteModel note)
         {
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 Note noteEntity = new Note
                 {
@@ -804,7 +931,7 @@ namespace DemoUserManagement.DAL
             int Length = 0;
             try
             {
-                using (var Context = new FORMEntities1())
+                using (var Context = new FORMEntities())
                 {
                     Length = Context.Notes.ToList().Count;
 
@@ -820,7 +947,7 @@ namespace DemoUserManagement.DAL
         public static bool EmailExists(string email)
         {
 
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 return context.UserDetails.Any(u => u.Email == email);
             }
@@ -829,7 +956,7 @@ namespace DemoUserManagement.DAL
         public static bool UserEmail(string userId, string email)
         {
             bool emailExists = false;
-            using (var context = new FORMEntities1())
+            using (var context = new FORMEntities())
             {
                 if (int.TryParse(userId, out int userIdInt))
                 {

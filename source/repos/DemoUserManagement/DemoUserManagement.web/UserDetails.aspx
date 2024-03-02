@@ -45,8 +45,9 @@
                         permanentPincodeInput.val('');
                     }
                 });
+              
             });
-
+           
 
         </script>
 
@@ -284,7 +285,9 @@
 
                     <div class="col-md-4 position-relative">
                         <asp:Label ID="lblddlPresentState" runat="server" AssociatedControlID="ddlPresentState"> STATE:</asp:Label>
-                        <asp:DropDownList ID="ddlPresentState" runat="server" CssClass="form-control" placeholder="Select state"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlPresentState" runat="server" CssClass="form-control" placeholder="Select state">
+                            <asp:ListItem Value="Russia"></asp:ListItem>
+                        </asp:DropDownList>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlPresentState"
                             Display="Dynamic" CssClass="invalid-tooltip" ErrorMessage="Please select your State" />
                     </div>

@@ -1,0 +1,544 @@
+﻿@model DemoUserManagement.Models.ContainerModel
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDetails</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/Script.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("SaveDetails", "Home", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+    {
+        <center>
+            <h3>REGISTRATION FORM</h3>
+        </center>
+
+        <div class="container1 ">
+            <h3>PERSONAL DETAILS</h3>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.FirstName, "FIRST NAME:")
+                    @Html.TextBoxFor(model => model.User.FirstName, new { @class = "form-control", @id = "firstName", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.User.FirstName, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.MiddleName, "MIDDLE NAME:")
+                    @Html.TextBoxFor(model => model.User.MiddleName, new { @class = "form-control", @id = "middleName" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.LastName, "LAST NAME:")
+                    @Html.TextBoxFor(model => model.User.LastName, new { @class = "form-control", @id = "lastName", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.User.LastName, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.FatherName, "FATHER NAME:")
+                    @Html.TextBoxFor(model => model.User.FatherName, new { @class = "form-control", @id = "fatherName", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.User.FatherName, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.MotherName, "MOTHER NAME:")
+                    @Html.TextBoxFor(model => model.User.MotherName, new { @class = "form-control", @id = "motherName", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.User.MotherName, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 ">
+                    @Html.LabelFor(model => model.User.GuardianName, "GUARDIAN NAME(if any):")
+                    @Html.TextBoxFor(model => model.User.GuardianName, new { @class = "form-control", @id = "guardianName" })
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.DOB, "DATE OF BIRTH:")
+                    @Html.TextBoxFor(model => model.User.DOB, new { @class = "form-control", @type = "date", @id = "DateofBirth", @name = "DateOfBirth", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.User.DOB, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.BloodGroup, "Blood Group:")
+                    @Html.DropDownListFor(model => model.User.BloodGroup, new SelectList(new[] { "Select Here", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }), new { @class = "form-control", id = "BloodGroup" })
+                    <div class="invalid-feedback">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.Gender, "Gender:")
+                    <div class="d-flex">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Gender, "MALE", new { @class = "form-check-input", id = "male", required = "required" })
+                            @Html.LabelFor(model => model.User.Gender, "MALE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Gender, "FEMALE", new { @class = "form-check-input", id = "female", required = "required" })
+                            @Html.LabelFor(model => model.User.Gender, "FEMALE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Gender, "OTHERS", new { @class = "form-check-input", id = "others", required = "required" })
+                            @Html.LabelFor(model => model.User.Gender, "OTHER", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 ">
+                    @Html.LabelFor(model => model.User.Status, "Status:")
+                    <div class="d-flex">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Status, "SINGLE", new { @class = "form-check-input", id = "single", required = "required" })
+                            @Html.LabelFor(model => model.User.Status, "SINGLE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Status, "MARRIED", new { @class = "form-check-input", id = "married", required = "required" })
+                            @Html.LabelFor(model => model.User.Status, "MARRIED", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.WorkExperience, "Work Experience:")
+                    <div class="d-flex">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.WorkExperience, "0 yrs", new { @class = "form-check-input", id = "0 yrs", required = "required" })
+                            @Html.LabelFor(model => model.User.WorkExperience, "0 yrs", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.WorkExperience, "0-5 yrs", new { @class = "form-check-input", id = "0-5 yrs", required = "required" })
+                            @Html.LabelFor(model => model.User.WorkExperience, "0-5 yrs", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.WorkExperience, "6-10 yrs", new { @class = "form-check-input", id = "6-10 yrs", required = "required" })
+                            @Html.LabelFor(model => model.User.WorkExperience, "6-10 yrs", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.WorkExperience, "10+ yrs", new { @class = "form-check-input", id = "10+ yrs", required = "required" })
+                            @Html.LabelFor(model => model.User.WorkExperience, "10+ yrs", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.Documents, "Documents:")
+                    @Html.DropDownListFor(model => model.User.Documents, new SelectList(new[] { "Select Here", "AADHAR CARD", "PAN CARD", "DRIVING LICENSE", "VOTER ID CARD" }), new { @class = "form-control", id = "Documents" })
+                    @Html.ValidationMessageFor(model => model.User.Documents, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="fileInput1">DOC UPLOAD:</label>
+                    <input type="file" class="form-control" id="fileInput1" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    <label for="fileInput2">UPLOAD PHOTO:</label>
+                    <input type="file" class="form-control" id="fileInput2" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container2">
+            <h3>ACADEMIC DETAILS</h3>
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.Board10th, "10th Board:")
+                    <div class="d-flex">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board10th, "CBSE", new { @class = "form-check-input", id = "CBSE", required = "required" })
+                            @Html.LabelFor(model => model.User.Board10th, "CBSE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board10th, "ICSE", new { @class = "form-check-input", id = "ICSE", required = "required" })
+                            @Html.LabelFor(model => model.User.Board10th, "ICSE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board10th, "OTHERS", new { @class = "form-check-input", id = "OTHERS", required = "required" })
+                            @Html.LabelFor(model => model.User.Board10th, "OTHER", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    @Html.LabelFor(model => model.User.Board12th, "12th Board:")
+                    <div class="d-flex">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board12th, "CBSE", new { @class = "form-check-input", id = "CBS", required = "required" })
+                            @Html.LabelFor(model => model.User.Board12th, "CBSE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board12th, "ICSE", new { @class = "form-check-input", id = "ICS", required = "required" })
+                            @Html.LabelFor(model => model.User.Board12th, "ICSE", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(model => model.User.Board12th, "OTHERS", new { @class = "form-check-input", id = "OTHER", required = "required" })
+                            @Html.LabelFor(model => model.User.Board12th, "OTHER", new { @class = "form-check-label" })&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.Institute10th, "Class 10th Institute Name:")
+                    @Html.TextBoxFor(model => model.User.Institute10th, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.Institute10th, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.Institute12th, "Class 12th Institute Name:")
+                    @Html.TextBoxFor(model => model.User.Institute12th, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.Institute12th, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.InstituteBTECH, "B.Tech Institute Name:")
+                    @Html.TextBoxFor(model => model.User.InstituteBTECH, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.InstituteBTECH, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+            </div>
+
+
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.Percentage10th, "Class 10th Percentage:")
+                    @Html.TextBoxFor(model => model.User.Percentage10th, new { @class = "form-control", type = "number", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.Percentage10th, "Please fill up properly", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.Percentage12th, "Class 12th Percentage:")
+                    @Html.TextBoxFor(model => model.User.Percentage12th, new { @class = "form-control", type = "number", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.Percentage12th, "Please fill up properly", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.User.PercentageBTECH, "B.Tech CGPA:")
+                    @Html.TextBoxFor(model => model.User.PercentageBTECH, new { @class = "form-control", type = "number", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.PercentageBTECH, "Please fill up properly", new { @class = "invalid-tooltip" })
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="container3">
+            <h3>LOCATION</h3>
+            <h4>PRESENT ADDRESS:</h4>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPresentCountry" class="form-label star-mark required">Country</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.PresentCountry.CountryName, ViewBag.Countries as SelectList, new { @class = "form-select", data_bs_toggle = "tooltip", data_required = "required", title = "Select your country", id = "ddlPresentCountry", onchange = "DdlPresentCountry_SelectedIndexChanged()" })
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPresentState" class="form-label star-mark required">State</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.PresentState.StateName, new SelectList(new[] { "Select Here" }), new { @class = "form-select", data_bs_toggle = "tooltip", data_required = "required", id = "ddlPresentState" })
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="cityInput" class="form-label">CITY:</label>
+                    <input type="text" id="cityInput" list="cities_" class="form-control" placeholder="Select Here"
+                           name="PRESENT CITY" required>
+                    <datalist id="cities_">
+                        <option value="" label="Select Here">
+                        <option value="NEW DELHI">
+                        <option value="ISLAMABAD">
+                        <option value="SHINJUKU">
+                        <option value="SHIBUYA">
+                        <option value="OTHERS">
+                    </datalist>
+
+                    <div class="invalid-tooltip">
+                        Please select a valid city.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.PresentAddress.Address, " ADDRESS LINE1:")
+                    @Html.TextBoxFor(model => model.PresentAddress.Address, new { @class = "form-control", @id = "address1", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.PresentAddress.Address, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="address2">ADDRESS LINE 2:</label>
+                    <input type="text" class="form-control" id="address2" name="ADDRESS LINE 2" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="PINCODE">PINCODE</label>
+                    <input type="number" class="form-control" id="PINCODE" name="PINCODE" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 35px;">
+                <input type="checkbox" class="form-check-input" id="copyAddressCheckbox">
+                <label class="form-check-label" for="copyAddressCheckbox">Same as Present Address</label>
+            </div>
+
+            <h4>PERMANENT ADDRESS:</h4>
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPermanentCountry" class="form-label star-mark required">Country</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.PermanentCountry.CountryName, ViewBag.Countries as SelectList, new { @class = "form-select", data_bs_toggle = "tooltip", data_required = "required", title = "Select your country", data_label = "Country", id = "ddlPermanentCountry", onchange = "DdlPermanentCountry_SelectedIndexChanged()" })
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="ddlPermanentState" class="form-label star-mark required">State</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.PermanentState.StateName, new SelectList(new[] { "Select Here" }), new { @class = "form-select", data_bs_toggle = "tooltip", data_required = "required", id = "ddlPermanentState" })
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="cityInput1" class="form-label">CITY:</label>
+                    <input type="text" id="cityInput1" list="cities" class="form-control" placeholder="Select Here"
+                           name="PERMANENT CITY" required>
+                    <datalist id="cities">
+                        <option value="" label="Select Here">
+                        <option value="NEW DELHI">
+                        <option value="ISLAMABAD">
+                        <option value="SHINJUKU">
+                        <option value="SHIBUYA">
+                        <option value="OTHERS">
+                    </datalist>
+
+                    <div class="invalid-tooltip">
+                        Please select a valid city.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4 position-relative">
+                    @Html.LabelFor(model => model.PermanentAddress.Address, "ADDRESS LINE 1 :")
+                    @Html.TextBoxFor(model => model.PermanentAddress.Address, new { @class = "form-control", @id = "address1_", @required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.PermanentAddress.Address, "Please fill up", new { @class = "invalid-tooltip" })
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="address2_">ADDRESS LINE 2:</label>
+                    <input type="text" class="form-control" id="address2_" name=" ADDRESS LINE 2" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="PINCODE_">PINCODE</label>
+                    <input type="number" class="form-control" id="PINCODE_" name="PERMANENT PINCODE" required>
+                    <div class="invalid-tooltip">
+                        Please fill up
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="container4">
+            <h3>CONTACTS</h3>
+            <div class="row mb-5">
+                <div class="col-md-6 position-relative">
+                    @Html.LabelFor(model => model.User.PhoneNumber, "PHONE NUMBER:")
+                    @Html.TextBoxFor(model => model.User.PhoneNumber, new { @class = "form-control", type = "tel", pattern = "[0-9]{10}", required = "required" })
+                    @Html.ValidationMessageFor(model => model.User.PhoneNumber, "Mobile Number should be of 10 digits", new { @class = "invalid-tooltip" })
+                </div>
+
+                <div class="col-md-6 ">
+                    @Html.LabelFor(model => model.User.AlternatePhoneNumber, "ALTERNATE NUMBER:")
+                    @Html.TextBoxFor(model => model.User.AlternatePhoneNumber, new { @class = "form-control", type = "tel", pattern = "[0-9]{10}" })
+                    @Html.ValidationMessageFor(model => model.User.AlternatePhoneNumber, "Please fill up properly", new { @class = "invalid-tooltip" })
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6 position-relative">
+                @Html.LabelFor(model => model.User.Email, "EMAIL:")
+                @Html.TextBoxFor(model => model.User.Email, new { @class = "form-control", type = "email", id = "email", required = "required" })
+                @Html.ValidationMessageFor(model => model.User.Email, "Please fill up properly", new { @class = "invalid-tooltip" })
+            </div>
+
+            <div class="col-md-6 position-relative">
+                @Html.LabelFor(model => model.User.Password, "PASSWORD:")
+                @Html.PasswordFor(model => model.User.Password, new { @class = "form-control", id = "password", required = "required" })
+                @Html.ValidationMessageFor(model => model.User.Password, "Please fill it up", new { @class = "invalid-tooltip" })
+            </div>
+        </div>
+
+
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" id="btnSubmit">SUBMIT</button>
+            <button type="reset" class="btn btn-danger" id="btnReset">Reset</button>
+        </div>
+    }
+
+
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+        var copyAddressCheckbox = $('#copyAddressCheckbox');
+    var presentCountryInput = $('#ddlPresentCountry');
+    var presentStateInput = $('#ddlPresentState');
+    var presentCityInput = $('#cityInput');
+    var presentAddress1Input = $('#address1');
+    var presentAddress2Input = $('#address2');
+    var presentPincodeInput = $('#PINCODE');
+    var presentPincodeInput = $('#PINCODE');
+
+    var permanentCountryInput = $('#ddlPermanentCountry');
+    var permanentStateInput = $('#ddlPermanentState');
+    var permanentCityInput = $('#cityInput1');
+    var permanentAddress1Input = $('#address1_');
+    var permanentAddress2Input = $('#address2_');
+    var permanentPincodeInput = $('#PINCODE_');
+
+
+    copyAddressCheckbox.change(function () {
+
+            if (copyAddressCheckbox.prop('checked')) {
+        permanentCountryInput.val(presentCountryInput.val());
+    permanentStateInput.val(presentStateInput.val());
+    permanentCityInput.val(presentCityInput.val());
+    permanentAddress1Input.val(presentAddress1Input.val());
+    permanentAddress2Input.val(presentAddress2Input.val());
+    permanentPincodeInput.val(presentPincodeInput.val());
+            } else {
+
+        permanentCountryInput.val('');
+    permanentStateInput.val('');
+    permanentCityInput.val('');
+    permanentAddress1Input.val('');
+    permanentAddress2Input.val('');
+    permanentPincodeInput.val('');
+            }
+        });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+            var select = document.getElementById("BloodGroup");
+    if (select != null) {
+        select.options[0].disabled = true;
+            }
+        });
+
+    document.addEventListener('DOMContentLoaded', function () {
+            var select = document.getElementById("Documents");
+    if (select != null) {
+        select.options[0].disabled = true;
+            }
+        });
+
+
+    });
+
+
+
+    function DdlPresentCountry_SelectedIndexChanged() {
+
+        var selectedCountry = $("#ddlPresentCountry").val();
+    console.log("Selected Country: " + selectedCountry);
+    populateStates(selectedCountry, "#ddlPresentState");
+    }
+
+    function DdlPermanentCountry_SelectedIndexChanged() {
+        var selectedCountry = $("#ddlPermanentCountry").val();
+    console.log("Selected Country: " + selectedCountry);
+    populateStates(selectedCountry, "#ddlPermanentState");
+    }
+
+
+
+
+
+    (function () {
+        'use strict';
+
+
+    var forms = document.querySelectorAll('.needs-validation');
+
+
+    Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+            });
+    })();
+
+
+
+
+    function populateStates(selectedCountry, stateDropdownId) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetStatesForCountry", "Home")',
+            data: { selectedCountry: selectedCountry },
+            success: function (data) {
+                var ddlStates = $(stateDropdownId);
+                ddlStates.empty();
+                $.each(data, function (key, value) {
+                    ddlStates.append($("<option></option>").val(value).html(value));
+                });
+            },
+            error: function (error) {
+                console.log("Error:", error);
+            }
+        });
+}</script>
+
+

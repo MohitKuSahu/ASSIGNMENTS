@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FORMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FORMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressDetails">
           <Key>
             <PropertyRef Name="ID" />
@@ -91,6 +91,8 @@
           <Property Name="Percentage12th" Type="int" />
           <Property Name="InstitueBTECH" Type="nvarchar(max)" />
           <Property Name="PercentageBTECH" Type="int" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Profile" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -206,8 +208,7 @@
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FORMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -307,6 +308,8 @@
           <Property Name="PercentageBTECH" Type="Int32" />
           <NavigationProperty Name="AddressDetails" Relationship="Self.FK__AddressDe__UserI__46E78A0C" FromRole="UserDetails" ToRole="AddressDetails" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__UserID__534D60F1" FromRole="UserDetails" ToRole="UserRole" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Profile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -390,7 +393,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FORMEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FORMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetail" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Documents" EntityType="Self.Document" />
@@ -429,7 +432,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FORMModelStoreContainer" CdmEntityContainer="FORMEntities1">
+        <EntityContainerMapping StorageEntityContainer="FORMModelStoreContainer" CdmEntityContainer="FORMEntities">
           <EntitySetMapping Name="AddressDetails">
             <EntityTypeMapping TypeName="FORMModel.AddressDetail">
               <MappingFragment StoreEntitySet="AddressDetails">
@@ -496,6 +499,8 @@
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="FORMModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

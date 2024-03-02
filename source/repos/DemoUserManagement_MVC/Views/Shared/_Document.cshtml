@@ -1,0 +1,74 @@
+﻿@model DemoUserManagement.Models.ContainerModel
+
+<html>
+<head>
+    
+</head>
+<body>
+
+    <h4>Add Docs in this page</h4>
+    <div>
+        <label for="ddlDocumentType">Select Document Type:</label>
+        @Html.DropDownList("ddlDocumentType", new SelectList(
+                new[]
+                {
+            new { Value = "1", Text = "Documents" },
+            new { Value = "2", Text = "ProfilePic" }
+                                },
+                "Value",
+                "Text"
+            ), "Select", new { @class = "form-control", id = "ddlDocumentType" })
+    </div>
+
+    <div class="row">
+        <div>
+            <label for="fileUpload">CHOOSE FILES:</label>
+            <input type="file" class="form-control" id="fileUpload" required>
+            <div class="invalid-tooltip">
+                Please fill up
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button id="DocumentBtn" class="btn btn-primary">Upload</button>
+        </div>
+        <input type="hidden" id="docObjectID" value="@ViewBag.ObjectId" />
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="notesContainer">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>DocumentID</th>
+                            <th>DocumentOriginalName</th>
+                            <th>Added On</th>
+                            <th>DownloadFile</th>
+                        </tr>
+                    </thead>
+                        @foreach (var doc in ViewBag.Documents)
+                        {
+                            <tr>
+                                <td>@doc.DocumentID</td>
+                                <td>@doc.DocumentOriginalName</td>
+                                <td>@doc.TimeStamp</td>
+                                <td>
+                                    @Html.ActionLink("Download", "DownloadFile", "Document", new { fileName = doc.DocumentGuidName }, null)
+                                </td>
+                            </tr>
+                        }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/Scripts/Documents.js"></script>
+   
+
+    

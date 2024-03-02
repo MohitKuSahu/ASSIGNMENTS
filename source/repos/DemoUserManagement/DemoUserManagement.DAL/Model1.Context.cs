@@ -13,10 +13,10 @@ namespace DemoUserManagement.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FORMEntities1 : DbContext
+    public partial class FORMEntities : DbContext
     {
-        public FORMEntities1()
-            : base("name=FORMEntities1")
+        public FORMEntities()
+            : base("name=FORMEntities")
         {
         }
     

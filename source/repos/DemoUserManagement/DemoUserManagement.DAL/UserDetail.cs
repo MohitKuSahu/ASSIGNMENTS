@@ -46,6 +46,8 @@ namespace DemoUserManagement.DAL
         public Nullable<int> Percentage12th { get; set; }
         public string InstitueBTECH { get; set; }
         public Nullable<int> PercentageBTECH { get; set; }
+        public string FileName { get; set; }
+        public string Profile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddressDetail> AddressDetails { get; set; }

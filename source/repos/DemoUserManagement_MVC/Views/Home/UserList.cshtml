@@ -1,0 +1,119 @@
+﻿@model DemoUserManagement.Models.ContainerModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    int pageSize = 5;
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages;
+    int k = (currentPage - 1) * pageSize + 1;
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Serial No.</th>
+                <th><a href="#" class="sort" data-column="1" data-sort-order="asc">First Name</a></th>
+                <th>Last Name</th>
+                <th>Father Name</th>
+                <th>Mother Name</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ViewBag.Users.Count; i++)
+            {
+                var user = ViewBag.Users[i];
+
+                <tr>
+                    <td>@k</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.FatherName</td>
+                    <td>@user.MotherName</td>
+                    <td>@user.Gender</td>
+                    <td>@user.BloodGroup</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.Email</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { @id = user.UserID }) </td>
+                </tr>
+                k++;
+
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination">
+
+        @if (currentPage > 1)
+        {
+            <span class="page">
+                @Html.ActionLink("Previous", "UserList", new { page = currentPage - 1 })
+            </span>
+        }
+
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <span class="page @(i == currentPage ? "current" : "")">
+                @Html.ActionLink(i.ToString(), "UserList", new { page = i })
+            </span>
+        }
+
+        @if (currentPage < totalPages)
+        {
+            <span class="page">
+                @Html.ActionLink("Next", "UserList", new { page = currentPage + 1 })
+            </span>
+        }
+    </div>
+</body>
+</html>
+<script>
+        $(document).ready(function () {
+            $(".sort").click(function () {
+                var originalOrder = true;
+                var table = $(this).closest("table");
+                var column = parseInt($(this).data("column"));
+                var sortOrder = $(this).data("sort-order") || 'asc';
+           
+                var rows = table.find("tbody > tr").get();
+                rows.sort(function (a, b) {
+                    var keyA = $(a).children("td").eq(column).text().toUpperCase();
+                    var keyB = $(b).children("td").eq(column).text().toUpperCase();
+
+                    var comparison = sortOrder === 'asc' ? 1 : -1;
+
+                    if (keyA < keyB) return -1 * comparison;
+                    if (keyA > keyB) return 1 * comparison;
+                    return 0;
+                });
+
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                $(this).data("sort-order", sortOrder);
+
+              
+                $.each(rows, function (index, row) {
+                    table.children("tbody").append(row);
+                });
+            });
+    });
+</script>
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "User";
+}
+
+@*@{
+    int i = 1;
+    while (i < 10)
+    {
+        <h1>The value is @i</h1>
+        i++;
+    }
+}*@
+
+    <h1>@ViewBag.Massage</h1>
+    <h1>@ViewData["Message"]</h1> 
+    <h1> @ViewData["Time"] </h1>
+
+    <ul>
+        @{
+            var stud = (DemoProject.Models.Student)ViewData["Student"];
+            <li>@stud.Id</li>
+            <li>@stud.Name</li>
+            <li>@stud.Email</li>
+
+            var stu = ViewBag.Student;
+            <li>@stu.Id</li>
+            <li>@stu.Name</li>
+            <li>@stu.Email</li>
+        }
+    </ul>
+
+    <h1>Character Name:@Session["Guts"]</h1>
