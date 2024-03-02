@@ -89,23 +89,23 @@ $(document).ready(function () {
     var permanentPincodeInput = document.getElementById("<%= PINCODE_.ClientID %>");
 
 
-    //copyAddressCheckbox.change(function () {
-    //    if (copyAddressCheckbox.prop('checked')) {
-    //        permanentCountryInput.val(presentCountryInput.val());
-    //        permanentStateInput.val(presentStateInput.val());
-    //        permanentCityInput.val(presentCityInput.val());
-    //        permanentAddress1Input.val(presentAddress1Input.val());
-    //        permanentAddress2Input.val(presentAddress2Input.val());
-    //        permanentPincodeInput.val(presentPincodeInput.val());
-    //    } else {
-    //        permanentCountryInput.val('');
-    //        permanentStateInput.val('');
-    //        permanentCityInput.val('');
-    //        permanentAddress1Input.val('');
-    //        permanentAddress2Input.val('');
-    //        permanentPincodeInput.val('');
-    //    }
-    //});
+    copyAddressCheckbox.change(function () {
+        if (copyAddressCheckbox.prop('checked')) {
+            permanentCountryInput.val(presentCountryInput.val());
+            permanentStateInput.val(presentStateInput.val());
+            permanentCityInput.val(presentCityInput.val());
+            permanentAddress1Input.val(presentAddress1Input.val());
+            permanentAddress2Input.val(presentAddress2Input.val());
+            permanentPincodeInput.val(presentPincodeInput.val());
+        } else {
+            permanentCountryInput.val('');
+            permanentStateInput.val('');
+            permanentCityInput.val('');
+            permanentAddress1Input.val('');
+            permanentAddress2Input.val('');
+            permanentPincodeInput.val('');
+        }
+    });
 });
 
 function populateStates(selectedCountry, stateDropdownId) {
