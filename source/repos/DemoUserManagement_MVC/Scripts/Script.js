@@ -1,6 +1,4 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var copyAddressCheckbox = $('#copyAddressCheckbox');
     var presentCountryInput = $('#ddlPresentCountry');
     var presentStateInput = $('#ddlPresentState');
@@ -53,12 +51,29 @@ $(document).ready(function () {
         }
     });
 
+    $.ajax({
+        type: "GET",
+        url: '@Url.Action("GetCountries", "UserDetails2")',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var ddlCountries = $("#ddlPresentCountry");
+            var ddlPermanentCountry = $("#ddlPermanentCountry");
 
+            ddlCountries.empty();
+            ddlPermanentCountry.empty();
+            $.each(data.d, function (key, value) {
+                ddlCountries.append($("<option></option>").val(value).html(value));
+                ddlPermanentCountry.append($("<option></option>").val(value).html(value));
+            });
+        },
+        error: function (error) {
+            console.log("Error:", error);
+        }
+    });
 });
 
-
 function DdlPresentCountry_SelectedIndexChanged() {
-
     var selectedCountry = $("#ddlPresentCountry").val();
     console.log("Selected Country: " + selectedCountry);
     populateStates(selectedCountry, "#ddlPresentState");
@@ -70,19 +85,10 @@ function DdlPermanentCountry_SelectedIndexChanged() {
     populateStates(selectedCountry, "#ddlPermanentState");
 }
 
-
-
-
-
-
-
-
-
-
 function populateStates(selectedCountry, stateDropdownId) {
     $.ajax({
         type: "GET",
-        url: '@Url.Action("GetStatesForCountry", "Home")',
+        url: '@Url.Action("GetStatesForCountry", "UserDetails2")',
         data: { selectedCountry: selectedCountry },
         success: function (data) {
             var ddlStates = $(stateDropdownId);
@@ -111,6 +117,7 @@ function populateStates(selectedCountry, stateDropdownId) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
+               
                 form.classList.add('was-validated');
             }, false);
         });
@@ -180,6 +187,5 @@ function SubmitFormData() {
             console.log("Error:", error);
         }
     });
-
 
 }
