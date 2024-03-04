@@ -60,11 +60,9 @@
             var ddlCountries = $("#ddlPresentCountry");
             var ddlPermanentCountry = $("#ddlPermanentCountry");
 
-            ddlCountries.empty();
-            ddlPermanentCountry.empty();
-            $.each(data.d, function (key, value) {
-                ddlCountries.append($("<option></option>").val(value).html(value));
-                ddlPermanentCountry.append($("<option></option>").val(value).html(value));
+            $.each(data, function (key, value) {
+                ddlCountries.append($("<option></option>").text(value).val(value));
+                ddlPermanentCountry.append($("<option></option>").text(value).val(value));
             });
         },
         error: function (error) {
@@ -117,75 +115,89 @@ function populateStates(selectedCountry, stateDropdownId) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
-               
+                else {
+                    event.preventDefault();
+                    SubmitFormData();
+                }
                 form.classList.add('was-validated');
             }, false);
         });
 })();
 
 function SubmitFormData() {
-    var formData = {
-        fname: $("#firstName").val(),
-        mname: $("#middleName").val(),
-        lname: $("#lastName").val(),
-        fathername: $("#fatherName").val(),
-        mothername: $("#motherName").val(),
-        gname: $("#gname").val(),
-        dob: $("#DateofBirth").val(),
-        gender: $("input[name='GENDER']:checked").val(),
-        bloodGroupInput: $("#bloodGroupInput").val(),
-        status: $("input[name='STATUS']:checked").val(),
-        workExperience: $("input[name='WORKEXPERIENCE']:checked").val(),
-        documentsInput: $("#documentsInput").val(),
-        board10: $("input[name='Board10']:checked").val(),
-        board12: $("input[name='Board12']:checked").val(),
-        institutename10: $("#institutename10").val(),
-        institutename10: $("#institutename12").val(),
-        institutenameB_Tech: $("#institutenameB.Tech").val(),
-        percent10: $("#percent10").val(),
-        percent12: $("#percent12").val(),
-        percentB_Tech: $("#percentB.Tech").val(),
-        email: $("#email").val(),
-        password: $("#password").val(),
-        phn: $("#phn").val(),
-        altn: $("#altn").val(),
-    };
-    var PermanentAddress = {
-        ddlPermanentCountry: $("#ddlPermanentCountry").val(),
-        ddlPermanentState: $("#ddlPermanentState").val(),
-        address1_: $("#address1_").val(),
-        type: 1,
-    };
-    var PresentAddress = {
-        ddlPresentCountry: $("#ddlPresentCountry").val(),
-        ddlPresentState: $("#ddlPresentState").val(),
-        address1: $("#address1").val(),
-        type: 0,
-    }
+    var userDetails = {
+        User: {
+            FirstName: $("#firstName").val(),
+            MiddleName: $("#middleName").val(),
+            LastName: $("#lastName").val(),
+            FatherName: $("#fatherName").val(),
+            MotherName: $("#motherName").val(),
+            GuardianName: $("#gname").val(),
+            DOB: $("#DateofBirth").val(),
+            Gender: $("input[name='GENDER']:checked").val(),
+            BloodGroup: $("#bloodGroupInput").val(),
+            Status: $("input[name='STATUS']:checked").val(),
+            WorkExperience: $("input[name='WORKEXPERIENCE']:checked").val(),
+            Documents: $("#documentsInput").val(),
+            Board10th: $("input[name='Board10']:checked").val(),
+            Board12th: $("input[name='Board12']:checked").val(),
+            Institute10th: $("#institutename10").val(),
+            Institute12th: $("#institutename12").val(),
+            InstituteBTECH: $("#institutenameB.Tech").val(),
+            Percentage10th: $("#percent10").val(),
+            Percentage12th: $("#percent12").val(),
+            PercentageBTECH: $("#percentB.Tech").val(),
+            Email: $("#email").val(),
+            Password: $("#password").val(),
+            PhoneNumber: $("#phn").val(),
+            AlternatePhoneNumber: $("#altn").val(),
+            FileName: $("#docUpload").val(),
+            Profile: $("PHOTO").val()
 
-    var addressesList = [];
-    addressesList.push(PermanentAddress);
-    addressesList.push(PresentAddress);
+        },
+        PresentAddress: {
+            Address: $("#address1").val(),
+        },
+        PresentCountry: {
+            CountryName: $("#ddlPresentCountry").val(),
+        },
+        PresentState: {
+            StateName: $("#ddlPresentState").val(),
+        },
+        PermanentAddress: {
+            Address: $("#address1_").val(),
+        },
+        PermanentCountry: {
+            CountryName: $("#ddlPermanentCountry").val(),
+        },
+        PermanentState: {
+            StateName: $("#ddlPermanentState").val(),
+        },
 
+    };
+
+    var formData = new FormData();
+    formData.append('file1', document.getElementById('docUpload').files[0]);
+    formData.append('file2', document.getElementById('PHOTO').files[0]);
 
     $.ajax({
         type: "POST",
         url: '@Url.Action("SaveDetails", "UserDetails2")',
         data: JSON.stringify({
-            user: formData,
-            Address: addressesList
+            userDetails: userDetails,
+            formData: formData
         }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            console.log(JSON.stringify({
-                user: formData,
-                Address: addressesList
-            }));
+
         },
         error: function (error) {
             console.log("Error:", error);
         }
     });
+
+
+
 
 }
