@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="summaryReport">
+            <center><h1>Reports</h1></center>
+            <h4>Inventory Summary Report</h4>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ItemID</th>
+                        <th>ItemName</th>
+                        <th>AvailableQuantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ViewBag.Products.Count; i++)
+                    {
+                        var product = ViewBag.Products[i];
+
+                        <tr>
+                            <td>@product.ProductID</td>
+                            <td>@product.ProductTitle</td>
+                            <td>@(product.QuantityTotal-product.QuantityBooked)</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+
+            <h4>Inventory Detailed Report</h4>
+            @for (int i = 0; i < ViewBag.Products.Count; i++)
+            {
+                var product = ViewBag.Products[i];
+                <div class="card mb-3 product-section">
+                    <div class="card-header">
+                        Item Name: @product.ProductTitle
+                        <br />
+                        Available Quantity: @(product.QuantityTotal-product.QuantityBooked)
+                    </div>
+                    @if (ViewBag.CheckTransaction[i])
+                    {
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Date/time</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var transaction in ViewBag.Transactions)
+                                    {
+                                        if (transaction.ProductID == product.ProductID)
+                                        {
+                                            <tr>
+                                                <td>@transaction.TransactionID</td>
+                                                <td>@transaction.TransactionDateTime</td>
+                                                <td>@transaction.TransactionType</td>
+                                                <td>@transaction.Quantity</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+        <button class="btn btn-success" onclick="exportToPDF()">Export to PDF</button>
+
+    </body>
+</html>
+
+<script src="~/Scripts/Script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+

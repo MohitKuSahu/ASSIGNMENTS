@@ -1,0 +1,86 @@
+﻿@model TentRentalProject.Models.CustomerModel
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    int pageSize = 5;
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages;
+    int k = (currentPage - 1) * pageSize + 1;
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Serial No.</th>
+                <th>CustomerName</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ViewBag.Customer.Count; i++)
+            {
+                var customer = ViewBag.Customer[i];
+
+                <tr>
+                    <td>@k</td>
+                    <td>@customer.CustomerName</td>
+                </tr>
+                k++;
+
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+
+        @if (currentPage > 1)
+        {
+            <span class="page">
+                @Html.ActionLink("Previous", "Index", new { page = currentPage - 1 })
+            </span>
+        }
+
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <span class="page @(i == currentPage ? "current" : "")">
+                @Html.ActionLink(i.ToString(), "Index", new { page = i })
+            </span>
+        }
+
+        @if (currentPage < totalPages)
+        {
+            <span class="page">
+                @Html.ActionLink("Next", "Index", new { page = currentPage + 1 })
+            </span>
+        }
+    </div>
+    <h1>Add new Customer:</h1>
+    @using (Html.BeginForm("SaveDetails", "Customer", FormMethod.Post))
+    {
+        <div class="row mb-5">
+           <div class="col-md-4 position-relative">
+            @Html.LabelFor(model => model.CustomerName, "ENTER Customer Name:")
+            @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", @required = "required" })
+
+            @Html.ValidationMessageFor(model => model.CustomerName, "Please fill up", new { @class = "invalid-tooltip" })
+           </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" id="btnSubmit">Add new Customer</button>
+        </div>
+    }
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+

@@ -1,0 +1,87 @@
+﻿@model TentRentalProject.Models.ContainerModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Scripts/Homepage.css" />
+</head>
+<body>
+
+    @using (Html.BeginForm("SaveDetails", "Home", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+    {
+        <div class="card mb-3">
+            <div class="card-header" id="head">
+               WELCOME TO TENT HOUSE RENTAL
+            </div>
+            <div class="card-body">
+                @Html.LabelFor(model => model.Customer.CustomerName, "Enter Your Name:")
+                @Html.TextBoxFor(model => model.Customer.CustomerName, new { @class = "form-control", @id = "customerName", @required = "required" })
+                @Html.ValidationMessageFor(model => model.Customer.CustomerName, "Please fill up properly", new { @class = "invalid-tooltip" })
+            </div>
+
+        </div>
+
+        for (int i = 0; i < ViewBag.Product.Count; i++)
+        {
+            var product = ViewBag.Product[i];
+            @Html.HiddenFor(model => model.TransactionHistory.TransactionList[i].ProductID, new {Value=product.ProductID})
+
+            <div class="card mb-3 product-section">
+                <div class="card-header">
+                    Item @(i+1): @product.ProductTitle
+                </div>
+                <div class="card-body">
+                    <p>Available Quantity:@(product.QuantityTotal - product.QuantityBooked)</p>
+                    <p>Price: $@product.Price per day</p>
+                    <p class="d-flex">
+                        <span class="transaction-label">
+                            @Html.LabelFor(model => model.TransactionHistory.TransactionList[i].TransactionType, "Select Transaction Type:")
+                        </span>
+
+                        <span class="transaction-radio">
+                            @Html.RadioButtonFor(model => model.TransactionHistory.TransactionList[i].TransactionType, "OUT")OUT
+                        </span>
+
+                        <span class="transaction-radio">
+                            @Html.RadioButtonFor(model => model.TransactionHistory.TransactionList[i].TransactionType, "IN")IN
+                        </span>
+                        @Html.ValidationMessageFor(model => model.TransactionHistory.TransactionList[i].TransactionType)
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.TransactionHistory.TransactionList[i].Quantity, "Enter your Quantity:")
+                        @Html.TextBoxFor(model => model.TransactionHistory.TransactionList[i].Quantity, new { @class = "form-control", type = "number"})
+                        @Html.ValidationMessageFor(model => model.TransactionHistory.TransactionList[i].Quantity)
+                    </p>
+                </div>
+            </div>
+
+        }
+
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" id="btn-Submit">SUBMIT</button>
+            <button type="reset" class="btn btn-danger" id="btn-Reset">Reset</button>
+        </div>
+    }
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/Validation.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

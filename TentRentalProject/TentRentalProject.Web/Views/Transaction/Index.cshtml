@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    int pageSize = 5;
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages;
+    int k = (currentPage - 1) * pageSize + 1;
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>SerialNo.</th>
+                <th>TransactionDateTime</th>
+                <th>TransactionType</th>
+                <th>Quantity</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ViewBag.Transaction.Count ; i++)
+            {
+                var Transaction = ViewBag.Transaction[i];
+
+                <tr>
+                    <td>@k</td>
+                    <td>@Transaction.TransactionDateTime</td>
+                    <td>@Transaction.TransactionType</td>
+                    <td>@Transaction.Quantity</td>
+                </tr>
+                k++;
+
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+
+        @if (currentPage > 1)
+        {
+            <span class="page">
+                @Html.ActionLink("Previous", "Index", new { page = currentPage - 1 })
+            </span>
+        }
+
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <span class="page @(i == currentPage ? "current" : "")">
+                @Html.ActionLink(i.ToString(), "Index", new { page = i })
+            </span>
+        }
+
+        @if (currentPage < totalPages)
+        {
+            <span class="page">
+                @Html.ActionLink("Next", "Index", new { page = currentPage + 1 })
+            </span>
+        }
+    </div>
+
+  
+    <div class="d-flex justify-content-between">
+        <button id="redirectButton" class="btn btn-primary">Add New Transaction</button>
+        @using (Html.BeginForm("DeleteAllTransactions", "Transaction", FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-success" id="btnSubmit">Delete Transaction</button>
+        }
+    </div>
+    
+
+    </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/Scripts/Transaction.js"></script>
+
+
+

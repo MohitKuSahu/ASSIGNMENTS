@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace DemoUserManagement_MVC
+namespace TentRentalProject.Web
 {
     public class RouteConfig
     {
@@ -17,12 +17,6 @@ namespace DemoUserManagement_MVC
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                   name: "UserList",
-                   url: "UserList/{page}",
-                   defaults: new { controller = "Home", action = "UserList", page = UrlParameter.Optional }
             );
         }
     }

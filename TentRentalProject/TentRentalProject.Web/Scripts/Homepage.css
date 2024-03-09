@@ -1,0 +1,21 @@
+﻿body {
+    padding: 20px;
+}
+
+.transaction-label {
+    font-weight: bold;
+}
+
+.transaction-radio {
+    margin-right: 10px;
+}
+
+#head {
+    background-color: #3498db;
+    color: #ecf0f1;
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
