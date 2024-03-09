@@ -1,4 +1,4 @@
-Project Name :- TENT RENTAL SYSTEM
+Project Name :- TENT RENTAL MANAGEMENT
 
 In this Project, An authorize User can rent out/in the products available.
 It contains 5 sections:
