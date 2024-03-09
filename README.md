@@ -15,13 +15,13 @@ It contains 5 sections:
 - Here, we can see total customers available
 - Along with adding new customers
   
-4. Transactions:
+4.Transactions:
 - Total Transactions executed by
 - Also can Delete all Transactions
   
-5. Reports:
--> Inventory Summary Report:- List of products and quantity available in a table
--> Inventory Detailed Report:- List of Transactions associated with each product in a table.
+5.Reports:
+-Inventory Summary Report:- List of products and quantity available in a table
+-Inventory Detailed Report:- List of Transactions associated with each product in a table.
 
 Along with Login and SignUp page...
 You can also refer to the SQL file to know about contents of each table.
