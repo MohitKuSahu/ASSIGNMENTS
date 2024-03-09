@@ -21,7 +21,6 @@ It contains 5 sections:
   
 5.Reports:
 -Inventory Summary Report:- List of products and quantity available in a table
-
 -Inventory Detailed Report:- List of Transactions associated with each product in a table.
 
 Along with Login and SignUp page...
