@@ -9,7 +9,11 @@ CREATE TABLE Users (
 -- Create Product table
 CREATE TABLE Product (
     ProductID INT IDENTITY(1,1) PRIMARY KEY,
+<<<<<<< HEAD
     ProductTitle VARCHAR(255) UNIQUE
+=======
+    ProductTitle VARCHAR(255) UNIQUE,
+>>>>>>> eb06405ff21b2a217b5c84e4ed0f3b08b904636d
     QuantityTotal INT,
     QuantityBooked INT,
     Price DECIMAL(10, 2)
