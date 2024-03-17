@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <link rel="stylesheet" href="~/Content/StyleSheet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < ViewBag.Transaction.Count ; i++)
+            @for (int i = 0; i < ViewBag.Transaction.Count; i++)
             {
                 var Transaction = ViewBag.Transaction[i];
 
@@ -69,7 +69,7 @@
         }
     </div>
 
-  
+
     <div class="d-flex justify-content-between">
         <button id="redirectButton" class="btn btn-primary">Add New Transaction</button>
         @using (Html.BeginForm("DeleteAllTransactions", "Transaction", FormMethod.Post))
@@ -77,12 +77,18 @@
             <button type="submit" class="btn btn-success" id="btnSubmit">Delete Transaction</button>
         }
     </div>
-    
 
-    </body>
+
+</body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="~/Scripts/Transaction.js"></script>
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
 
 
 

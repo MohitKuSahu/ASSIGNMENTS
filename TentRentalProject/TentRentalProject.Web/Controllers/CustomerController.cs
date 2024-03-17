@@ -34,8 +34,33 @@ namespace TentRentalProject.Web.Controllers
         public ActionResult SaveDetails(CustomerModel customer)
         {
 
-            BusinessLayer.InsertCustomer(customer);
-            return RedirectToAction("Index", "Home");
+            Tuple<int,bool> list=BusinessLayer.InsertCustomer(customer);
+
+            if (list.Item2)
+            {
+                TempData["Message"] = "Customer added successfully!";
+            }
+            else
+            {
+                TempData["Message"] = "Customer Already Exists!";
+            }
+
+            return RedirectToAction("Index", "Customer");
+        }
+
+        public ActionResult CustomerEdit(int id)
+        {
+
+            var customer = BusinessLayer.GetCustomerByID(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult CustomerEdit(CustomerModel product)
+        {
+            var customers = BusinessLayer.UpdateCustomer(product);
+            TempData["Message"] = "Customer Updated Successfuly";
+            return RedirectToAction("Index", "Customer");
         }
     }
 }

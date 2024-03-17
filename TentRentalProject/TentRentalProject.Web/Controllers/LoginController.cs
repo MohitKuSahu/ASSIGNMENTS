@@ -33,12 +33,13 @@ namespace TentRentalProject.Web.Controllers
                 if (BusinessLayer.IsAdmin(UserID))
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
-                    return RedirectToAction("Index","Reports");
+                    return RedirectToAction("Index", "Welcome");
                 }
                 else
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
-                    return RedirectToAction("Index","Welcome");
+                    TempData["Message"] = "Not An admin!";
+                    return RedirectToAction("Index", "Login");
                 }
 
             }
@@ -47,12 +48,14 @@ namespace TentRentalProject.Web.Controllers
                 ModelState.AddModelError("", "Invalid Username or password");
             }
             return View("Index", user);
+
         }
        
         public ActionResult SaveDetails(UserModel user) { 
 
             BusinessLayer.InsertUser(user);
-            return RedirectToAction("Index");
+            TempData["Message"] = "User added successfully!";
+            return RedirectToAction("Index","Login");
         }
 
     }

@@ -25,6 +25,7 @@ namespace TentRentalProject.DataAccessLayer
         public Nullable<int> QuantityTotal { get; set; }
         public Nullable<int> QuantityBooked { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public Nullable<int> AvailableQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionHistory> TransactionHistories { get; set; }

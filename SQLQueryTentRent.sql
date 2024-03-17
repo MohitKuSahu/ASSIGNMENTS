@@ -9,7 +9,7 @@ CREATE TABLE Users (
 -- Create Product table
 CREATE TABLE Product (
     ProductID INT IDENTITY(1,1) PRIMARY KEY,
-    ProductTitle VARCHAR(255),
+    ProductTitle VARCHAR(255) UNIQUE
     QuantityTotal INT,
     QuantityBooked INT,
     Price DECIMAL(10, 2)
@@ -35,6 +35,9 @@ CREATE TABLE TransactionHistory (
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
     FOREIGN KEY (TransactionParentID, ProductID, CustomerID) REFERENCES TransactionHistory(TransactionID, ProductID, CustomerID)
 );
+
+ALTER TABLE [Rental].[dbo].[Product]
+ADD [AvailableQuantity] AS ([QuantityTotal] - [QuantityBooked]);
 
 
 

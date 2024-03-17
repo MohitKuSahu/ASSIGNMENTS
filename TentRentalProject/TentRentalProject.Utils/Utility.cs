@@ -19,5 +19,20 @@ namespace TentRentalProject.Utils
             Admin=1,
             Others
         }
+        public enum Month
+        {
+            January=1,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December
+        }
     }
 }

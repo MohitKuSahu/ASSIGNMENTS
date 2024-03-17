@@ -13,21 +13,17 @@ namespace TentRentalProject.Utils
     {
         public static void AddData(Exception inputData)
         {
-            string logToFileSetting = ConfigurationManager.AppSettings["LogToFile"];
+            string fileName = DateTime.Now.ToString("yyyyMMdd_HH_mm_ss") + ".txt";
+            string fileFolderPath = ConfigurationManager.AppSettings["LogFileFolderPath"];
+            string filePath = Path.Combine(fileFolderPath, fileName);
 
-            bool logToFile = !string.IsNullOrEmpty(logToFileSetting) && bool.TryParse(logToFileSetting, out bool logToFileValue) && logToFileValue;
-            string fileName = DateTime.Now.ToString("yyyyMMdd") + ".txt";
-            if (logToFile)
+
+            if (!Directory.Exists(fileFolderPath))
             {
-                LogToFile(inputData, fileName);
+                Directory.CreateDirectory(fileFolderPath);
             }
-        }
 
-        private static void LogToFile(Exception inputData, string fileName)
-        {
-            string file = ConfigurationManager.AppSettings["LogFileFolderPath"];
-            file = Path.Combine(file, fileName);
-            using (StreamWriter writer = new StreamWriter(file, true))
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 writer.WriteLine(inputData);
             }

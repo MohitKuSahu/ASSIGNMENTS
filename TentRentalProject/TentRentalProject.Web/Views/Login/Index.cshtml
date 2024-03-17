@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-    <link rel="stylesheet" href="~/Scripts/LoginPage.css" />
+    <link rel="stylesheet" href="~/Content/LoginPage.css" />
 </head>
 <body>
     @using (Html.BeginForm("CheckDetails", "Login", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
@@ -35,9 +35,6 @@
                     </div>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    <p class="text-center mt-3">
-                        Don't have an account?
-                        @Html.ActionLink("SignUp", "SignUp", "Login")
                 </div>
             </div>
         }
@@ -47,8 +44,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="~/Scripts/Validation.js"></script>
 </body>
-
 </html>
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
 
 
 

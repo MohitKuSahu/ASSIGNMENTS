@@ -35,8 +35,30 @@ namespace TentRentalProject.Web.Controllers
         public ActionResult SaveDetails(ProductModel product)
         {
 
-            BusinessLayer.InsertProduct(product);   
-            return RedirectToAction("Index", "Home");
+            if (BusinessLayer.InsertProduct(product))
+            {
+                TempData["Message"] = "Product added successfully!";
+            }
+            else
+            {
+                TempData["Message"] = "Product Already Exists!";
+            }
+            
+            return RedirectToAction("Index", "Product");
+        }
+
+        public ActionResult ProductEdit(int id) { 
+
+            var product=BusinessLayer.GetProductByID(id);
+            return View(product);  
+        }
+
+        [HttpPost]
+        public ActionResult ProductEdit(ProductModel product)
+        {
+            var products = BusinessLayer.UpdateProduct(product);
+            TempData["Message"] = "Product Updated Successfuly";
+            return RedirectToAction("Index", "Product");
         }
     }
 }

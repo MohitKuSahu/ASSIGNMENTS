@@ -11,24 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .signupContainer {
-            max-width: 400px;
-            margin: auto;
-            margin-top: 100px;
-        }
-
-        .signupForm {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/LoginPage.css" />
 </head>
 <body>
     @using (Html.BeginForm("SaveDetails", "Login", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
@@ -54,16 +37,18 @@
                         @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "password", required = "required" })
                         @Html.ValidationMessageFor(model => model.Password, "Please fill it up", new { @class = "invalid-tooltip" })
                     </div>
-                    <button type="submit" class="btn btn-secondary btn-block">Back to Login</button>
+                    <button type="submit" class="btn btn-secondary btn-block">Submit Details</button>
                 </div>
             </div>
         }
     }
 
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="~/Scripts/Validation.js"></script>
 </body>
-
 </html>
+
 

@@ -21,6 +21,7 @@
           <Property Name="QuantityTotal" Type="int" />
           <Property Name="QuantityBooked" Type="int" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AvailableQuantity" Type="int" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="TransactionHistory">
           <Key>
@@ -125,6 +126,7 @@
           <Property Name="QuantityTotal" Type="Int32" />
           <Property Name="QuantityBooked" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AvailableQuantity" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="TransactionHistories" Relationship="Self.FK__Transacti__Produ__66603565" FromRole="Product" ToRole="TransactionHistory" />
         </EntityType>
         <EntityType Name="TransactionHistory">
@@ -234,6 +236,7 @@
                 <ScalarProperty Name="QuantityTotal" ColumnName="QuantityTotal" />
                 <ScalarProperty Name="QuantityBooked" ColumnName="QuantityBooked" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -15,8 +15,8 @@
     cursor: pointer;
 }
 
-.page.current {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-}
+    .page.current {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }

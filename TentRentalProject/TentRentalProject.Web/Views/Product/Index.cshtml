@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <link rel="stylesheet" href="~/Content/StyleSheet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -21,6 +21,7 @@
                 <th>QuantityTotal</th>
                 <th>QuantityBooked</th>
                 <th>Price</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                     <td>@product.QuantityTotal</td>
                     <td>@product.QuantityBooked</td>
                     <td>@product.Price</td>
+                    <td>@Html.ActionLink("Edit", "ProductEdit", new { @id = product.ProductID }) </td>
                 </tr>
                 k++;
 
@@ -74,7 +76,6 @@
             <div class="col-md-4 position-relative">
                 @Html.LabelFor(model => model.ProductTitle, "ENTER Product TITLE")
                 @Html.TextBoxFor(model => model.ProductTitle, new { @class = "form-control", @required = "required" })
-
                 @Html.ValidationMessageFor(model => model.ProductTitle, "Please fill up", new { @class = "invalid-tooltip" })
             </div>
 
@@ -100,3 +101,11 @@
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/Scripts/Validation.js"></script>
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
+

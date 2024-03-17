@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/Scripts/StyleSheet.css" />
+    <link rel="stylesheet" href="~/Content/StyleSheet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -23,6 +23,7 @@
             <tr>
                 <th>Serial No.</th>
                 <th>CustomerName</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 <tr>
                     <td>@k</td>
                     <td>@customer.CustomerName</td>
+                    <td>@Html.ActionLink("Edit", "CustomerEdit", new { @id = customer.CustomerID }) </td>
                 </tr>
                 k++;
 
@@ -67,20 +69,28 @@
     @using (Html.BeginForm("SaveDetails", "Customer", FormMethod.Post))
     {
         <div class="row mb-5">
-           <div class="col-md-4 position-relative">
-            @Html.LabelFor(model => model.CustomerName, "ENTER Customer Name:")
-            @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", @required = "required" })
+            <div class="col-md-4 position-relative">
+                @Html.LabelFor(model => model.CustomerName, "ENTER Customer Name:")
+                @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", @required = "required" })
 
-            @Html.ValidationMessageFor(model => model.CustomerName, "Please fill up", new { @class = "invalid-tooltip" })
-           </div>
+                @Html.ValidationMessageFor(model => model.CustomerName, "Please fill up", new { @class = "invalid-tooltip" })
+            </div>
         </div>
 
         <div class="d-flex justify-content-between">
+            <script src="~/Scripts/Validation.js"></script>
             <button type="submit" class="btn btn-success" id="btnSubmit">Add new Customer</button>
         </div>
     }
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/Scripts/Validation.js"></script>
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
 
 

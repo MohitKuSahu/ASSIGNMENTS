@@ -34,7 +34,8 @@ namespace TentRentalProject.Web.Controllers
         public ActionResult DeleteAllTransactions()
         {
             BusinessLayer.DeleteAllTransactions();
-            return RedirectToAction("Index", "Home");
+            TempData["Message"] = "All Transactions Deleted Successfully";
+            return RedirectToAction("Index", "Transaction");
         }
     }
 }
