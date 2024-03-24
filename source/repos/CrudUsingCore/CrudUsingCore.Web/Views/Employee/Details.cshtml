@@ -1,0 +1,48 @@
+﻿<!-- View: Index.cshtml (in Views/Employee folder) -->
+@{
+    ViewData["Title"] = "Employee Details";
+    int k = 1;
+}
+
+<h1>All Employee Details</h1>
+
+@if (ViewBag.Employees != null)
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Serial No.</th>
+                <th>Employee Name</th>
+                <th>Email</th>
+                <th>TechStack</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in ViewBag.Employees)
+            {
+                <tr>
+                    <td>@k</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.TechStack</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { @id = employee.EmployeeId })|@Html.ActionLink("Delete", "Delete", new { @id = employee.EmployeeId }) </td>
+                </tr>
+                k++;
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No employee details available.</p>
+}
+@Html.ActionLink("Back to Creation", "Index")
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
+

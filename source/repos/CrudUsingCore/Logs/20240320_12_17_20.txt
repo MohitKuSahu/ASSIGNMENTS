@@ -1,0 +1,2 @@
+System.DivideByZeroException: Attempted to divide by zero.
+   at CrudUsingCore.Web.Controllers.EmployeeController.Details() in D:\MINDFIRE\source\repos\CrudUsingCore\CrudUsingCore.Web\Controllers\EmployeeController.cs:line 31

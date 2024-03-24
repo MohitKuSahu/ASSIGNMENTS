@@ -1,0 +1,38 @@
+﻿@model CrudUsingCore.Models.EmployeeModel
+
+@{
+    ViewData["Title"] = "Insert Employee";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Insert Employee</h1>
+
+<form asp-controller="Employee" asp-action="Add" method="post" class="needs-validation" novalidate>
+
+    <div class="form-group mb-5 position-relative">
+        <label asp-for="Name">Employee Name:</label>
+        <input asp-for="Name" class="form-control"  type="text" required />
+        <div class="invalid-tooltip">Please Enter your Name.</div>
+    </div>
+
+    <div class="form-group mb-5 position-relative">
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" class="form-control" type="email" required />
+        <div class="invalid-tooltip">Please enter valid email</div>
+    </div>
+    <div class="form-group mb-5 position-relative">
+        <label asp-for="TechStack">TechStack:</label>
+        <input asp-for="TechStack" class="form-control" type="text" required />
+        <div class="invalid-tooltip">Please provide a Tech Stack.</div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+ <script src="~/js/Validation.js"></script>
+</body>
+</html>
