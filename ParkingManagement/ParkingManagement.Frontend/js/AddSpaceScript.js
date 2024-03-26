@@ -23,7 +23,7 @@ $(document).ready(function() {
                 var parkingZoneId = response.parkingZoneId;
                 var requestData = {
                     parkingZoneId: parkingZoneId,
-                    parkingSpaceTitle: parkingSpaceTitle
+                    parkingSpaceTitle: parkingSpaceTitle   
                 };
                 $.ajax({
                     type: 'POST',
