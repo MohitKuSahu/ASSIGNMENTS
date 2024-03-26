@@ -47,9 +47,9 @@ namespace ParkingManagement.BL
         {
             return await _dataService.ListParkingSpaceByIdAsync(ParkingZoneId);
         }
-        public async Task<bool> DeleteParkingSpaceAsync(int parkingSpaceId)
+        public async Task<bool> DeleteParkingSpaceAsync(string title)
         {
-            return await _dataService.DeleteParkingSpaceAsync(parkingSpaceId);
+            return await _dataService.DeleteParkingSpaceAsync(title);
         }
 
 
@@ -72,6 +72,11 @@ namespace ParkingManagement.BL
             return await _dataService.DeleteVehicleParkingAsync(parkingSpaceId);
         }
 
+
+        public async Task<int> CheckIfUserExists(UserModel user)
+        {
+            return await _dataService.CheckIfUserExists(user);
+        }
         public async Task<List<ReportModel>> GetParkingReportAsync(DateOnly startDate, DateOnly endDate)
         {
             return await _dataService.GetParkingReportAsync(startDate, endDate);

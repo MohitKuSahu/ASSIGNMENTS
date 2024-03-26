@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ParkingManagement.Models;
 using ParkingManagement.BL;
 using ParkingManagement.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingManagement.WebAPI.Controllers
 {
+    [Authorize(Roles = "Booking Counter Agent")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportAPIController : ControllerBase
@@ -20,7 +22,8 @@ namespace ParkingManagement.WebAPI.Controllers
             _Log = log;
         }
 
-
+       
+        [Authorize]
         [HttpGet("{startDate}/{endDate}")]
         public async Task<ActionResult<List<ReportModel>>> GetReportAsync(string startDate, string endDate)
         {

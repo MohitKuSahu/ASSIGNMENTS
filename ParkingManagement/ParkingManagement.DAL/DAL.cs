@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ParkingManagement.DAL.Models;
 using ParkingManagement.Models;
 
@@ -116,17 +117,18 @@ namespace ParkingManagement.DAL
         }
 
 
-        public async Task<bool> DeleteParkingSpaceAsync(int parkingSpaceId)
+        public async Task<bool> DeleteParkingSpaceAsync(string title)
         {
-
-            var spaceToDelete = await _parkingManagementContext.ParkingSpaces.FindAsync(parkingSpaceId);
+            var spaceToDelete = await _parkingManagementContext.ParkingSpaces.FirstOrDefaultAsync(s => s.ParkingSpaceTitle == title);
             if (spaceToDelete == null)
                 return false;
-
-            _parkingManagementContext.ParkingSpaces.Remove(spaceToDelete);
-            await _parkingManagementContext.SaveChangesAsync();
-            return true;
-
+            else
+            {
+               await DeleteVehicleParkingAsync(spaceToDelete.ParkingSpaceId);
+                _parkingManagementContext.ParkingSpaces.Remove(spaceToDelete);
+                await _parkingManagementContext.SaveChangesAsync();
+                return true;
+            }
         }
 
 
@@ -243,6 +245,21 @@ namespace ParkingManagement.DAL
             await _parkingManagementContext.SaveChangesAsync();
         }
 
+
+        public async Task<int> CheckIfUserExists(UserModel user)
+        {
+            int userId = -1;
+          
+                var users = await _parkingManagementContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+
+                if (users != null && users.Password == user.Password && users.Type==user.Type)
+                {
+                     
+                    userId = users.UserId;
+                }
+            
+            return userId;
+        }
         public async Task<List<ReportModel>> GetParkingReportAsync(DateOnly startDate, DateOnly endDate)
         {
             var parkingSpaces = await _parkingManagementContext.ParkingSpaces.ToListAsync();

@@ -6,7 +6,7 @@ $(document).ready(function() {
             { data: 'totalBookings' }, 
             { data: 'vehicleParked' }, 
         ],
-        paging: false // Disable pagination
+        paging: false 
     });
 
     $('#generate-report-btn').on('click', function() {
@@ -17,12 +17,16 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + (localStorage.getItem('jwtToken') || null)
+            },
             dataType: 'json',
             success: function(data) {
                 dataTable.clear().draw();
                 dataTable.rows.add(data).draw();
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                alert('It is Restricted Only to Booking Agent!');
                 console.error('Error fetching report data:', textStatus, errorThrown);
             }
         });
@@ -37,7 +41,7 @@ $(document).ready(function() {
         const formattedDate = currentDate.toDateString();
         const formattedTime = currentDate.toLocaleTimeString();
         const formattedDateTime = formattedDate +" " +formattedTime;
-        const fileName = `Inventory-Report-${formattedDateTime}.pdf`;
+        const fileName = `Parking-Report-${formattedDateTime}.pdf`;
         doc.save(fileName);
     });
 });

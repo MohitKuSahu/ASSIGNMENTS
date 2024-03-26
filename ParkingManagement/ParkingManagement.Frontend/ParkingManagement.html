@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Parking Space Listing</h1>
+    <div id="navbar-placeholder"></div>
+    <div class="container"> <!-- Renamed class from "container" to "content-wrapper" -->
+        <h1 class="mt-5 display-4">DashBoard</h1>
         <div class="form-group row">
             <div class="col-sm-6">
                 <label for="parking-zone-select">Select Parking Zone:</label>
@@ -25,8 +26,14 @@
         <div id="parking-spaces"></div>
     </div>
 
-   
-    
+
+
+    <div id="auto-refresh-indicator">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p>Auto-refreshing...</p>
+    </div>
+
+
 
     <div id="vehicle-modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -64,12 +71,13 @@
             </div>
         </div>
     </div>
-    
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <script src="js/Script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/Script.js"></script>
+    <script src="js/redirect.js"></script>
+    <script src="js/navbar.js"></script>
 </body>
 
 </html>

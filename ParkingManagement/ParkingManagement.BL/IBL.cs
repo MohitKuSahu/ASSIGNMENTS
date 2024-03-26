@@ -17,7 +17,7 @@ namespace ParkingManagement.BL
         Task<List<ParkingSpaceModel>> ListParkingSpaceAsync();
 
         Task<List<ParkingSpaceModel>> ListParkingSpaceByIdAsync(int ParkingZoneId);
-        Task<bool> DeleteParkingSpaceAsync(int parkingSpaceId);
+        Task<bool> DeleteParkingSpaceAsync(string title);
 
         Task<List<VehicleParkingModel>> ListVehicleParkingAsync();
 
@@ -27,6 +27,7 @@ namespace ParkingManagement.BL
 
         Task<bool> DeleteVehicleParkingAsync(int parkingSpaceId);
 
+        Task<int> CheckIfUserExists(UserModel user);
         Task<List<ReportModel>> GetParkingReportAsync(DateOnly startDate, DateOnly endDate);
     }
 }

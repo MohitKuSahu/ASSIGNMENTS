@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkingManagement.BL;
 using ParkingManagement.DAL.Models;
@@ -7,6 +8,7 @@ using ParkingManagement.Utils;
 
 namespace ParkingManagement.WebAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class VehicleParkingAPIController : ControllerBase
@@ -20,7 +22,7 @@ namespace ParkingManagement.WebAPI.Controllers
             _Log = log;
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<VehicleParkingModel>>> GetVehicleParking()
         {
@@ -36,6 +38,7 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Booking Counter Agent")]
         [HttpGet("{parkingSpaceId}")]
         public async Task<ActionResult<List<VehicleParkingModel>>> GetVehicleParkingById(int parkingSpaceId)
         {
@@ -51,6 +54,8 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Booking Counter Agent")]
         [HttpPost]
         public async Task<ActionResult<VehicleParkingModel>> AddVehicle(VehicleParkingModel model)
         {
@@ -66,6 +71,7 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Booking Counter Agent")]
         [HttpPut]
         public async Task<ActionResult<VehicleParkingModel>> UpdateVehicle(VehicleParkingModel model)
         {
@@ -82,6 +88,7 @@ namespace ParkingManagement.WebAPI.Controllers
 
         }
 
+        [Authorize(Roles = "Booking Counter Agent")]
         [HttpDelete("{Id}")]
         public async Task<ActionResult<VehicleParkingModel>> DeleteVehicle(int Id)
         {

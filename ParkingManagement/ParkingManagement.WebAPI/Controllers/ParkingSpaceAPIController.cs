@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ParkingManagement.BL;
 using ParkingManagement.Utils;
 using ParkingManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingManagement.WebAPI.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class ParkingSpaceAPIController : ControllerBase
@@ -19,6 +21,7 @@ namespace ParkingManagement.WebAPI.Controllers
             _Log = Log;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<ParkingSpaceModel>>> GetParkingSpace()
         {
@@ -35,7 +38,7 @@ namespace ParkingManagement.WebAPI.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet("{ParkingZoneId}")]
         public async Task<ActionResult<List<ParkingSpaceModel>>> ListParkingSpaceById(int ParkingZoneId)
         {
@@ -51,6 +54,7 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Booking Counter Agent")]
         [HttpPost]
         public async Task<ActionResult<ParkingSpaceModel>> AddParkingSpace(ParkingSpaceModel model)
         {
@@ -72,13 +76,23 @@ namespace ParkingManagement.WebAPI.Controllers
                 return BadRequest(ex);
             }
         }
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<ParkingSpaceModel>> DeleteParkingSpace(int Id)
+
+
+        [Authorize(Roles = "Booking Counter Agent")]
+        [HttpDelete("{title}")]
+        public async Task<ActionResult<ParkingSpaceModel>> DeleteParkingSpace(string title)
         {
             try
             {
-                var data = await _BAL.DeleteParkingSpaceAsync(Id);
-                return Ok();
+                var success = await _BAL.DeleteParkingSpaceAsync(title);
+                if (success)
+                {
+                    return Ok(new { success = true });
+                }
+                else
+                {
+                    return Ok(new { success = false });
+                }
             }
             catch (Exception ex)
             {

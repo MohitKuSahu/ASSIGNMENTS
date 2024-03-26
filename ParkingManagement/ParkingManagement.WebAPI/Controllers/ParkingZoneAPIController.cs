@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ParkingManagement.BL;
 using ParkingManagement.Models;
 using ParkingManagement.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ParkingManagement.WebAPI.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class ParkingZoneAPIController : ControllerBase
@@ -19,6 +21,7 @@ namespace ParkingManagement.WebAPI.Controllers
             _Log = Log;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<ParkingZoneModel>>> GetParkingZone()
         {
@@ -34,6 +37,7 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ParkingZoneModel>> AddParkingZone(ParkingZoneModel model)
         {
@@ -50,6 +54,7 @@ namespace ParkingManagement.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{Id}")]
         public async Task<ActionResult<ParkingZoneModel>> DeleteParkingZone(int Id)
         {
