@@ -8,11 +8,24 @@ namespace CrudEntityFramework
     {
         public static void AddData(Exception inputData, String fileName)
         {
-            string file = ConfigurationManager.AppSettings["LogFileFolderPath"];
-            file = file + "\\" + fileName;
-            using (StreamWriter writer = new StreamWriter(file, true))
+            string fileName = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            string filePath = Path.Combine(_fileFolderPath, fileName);
+
+            if (!Directory.Exists(_fileFolderPath))
             {
-                writer.WriteLine(inputData);
+                Directory.CreateDirectory(_fileFolderPath);
+            }
+
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine(DateTime.Now + "==>" + inputData.Message);
+
+                if (inputData.InnerException != null)
+                {
+                    writer.WriteLine(inputData.InnerException.Message);
+                }
+
+                writer.WriteLine();
             }
         }
     }
